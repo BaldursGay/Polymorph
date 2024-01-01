@@ -42,9 +42,9 @@
 @layer utilities {
 	.divider,
 	.divider-horizontal {
-		@apply dark:bg-gray-200 dark:bg-opacity-10 my-2 w-full h-0.5;
+		@apply bg-divider bg-opacity-10 my-2 w-full h-0.5;
 	}
 	.divider-vertical {
-		@apply dark:bg-gray-200 dark:bg-opacity-10 mx-2 h-full w-0.5;
+		@apply bg-divider bg-opacity-10 mx-2 h-full w-0.5;
 	}
 }
