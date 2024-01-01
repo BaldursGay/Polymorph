@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.link {
+		@apply text-blue-600 dark:text-blue-500 hover:underline;
+	}
+
+	.tooltip-content {
+		@apply opacity-0 absolute text-nowrap text-sm -mt-20 bg-tooltip px-2 py-1 rounded-md shadow-lg justify-center transition-all;
+		@apply -translate-x-1/2 left-[50%] invisible;
+	}
+
+	.tooltip:hover .tooltip-content {
+		@apply opacity-100 z-50 visible;
+	}
+
+	.sidebar-item {
+		@apply flex relative place-items-center gap-2 py-2 px-3 hover:bg-btn-hover hover:bg-opacity-55 text-text;
+		@apply text-xl rounded-lg scale-100 focus:scale-95 transition-all shadow-none hover:shadow-md dark:hover:shadow-lg;
+	}
+
+	.page-title {
+		@apply text-3xl font-semibold mb-2;
+	}
+
+	.btn-icon {
+		@apply flex relative place-items-center p-2 hover:bg-btn-hover hover:bg-opacity-50 text-xl rounded-lg dark:text-text;
+		@apply scale-100 focus:scale-95 transition-opacity;
+	}
+
+	.btn-rounded {
+		@apply rounded-full;
+	}
+
+	.btn-group-emphasized {
+		@apply bg-group-emphasized;
+	}
+}
+
+@layer utilities {
+	.divider,
+	.divider-horizontal {
+		@apply dark:bg-gray-200 dark:bg-opacity-10 my-2 w-full h-0.5;
+	}
+	.divider-vertical {
+		@apply dark:bg-gray-200 dark:bg-opacity-10 mx-2 h-full w-0.5;
+	}
+}
