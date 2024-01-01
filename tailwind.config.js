@@ -22,6 +22,11 @@ export default {
 				'group-emphasized': '#d1d5db',
 				'group-emphasized-hover': '#9ca3af',
 
+				'btn-emphasized': '#000000',
+				'btn-emphasized-text': '#000000',
+				'btn-emphasized-text-hover': '#FFFFFF',
+				'btn-emphasized-outline': '#000000',
+
 				input: '#e5e7eb',
 
 				'text-text': 'black'
@@ -37,6 +42,11 @@ export default {
 				'btn-hover': '#374151',
 				'group-emphasized': '#1e293b',
 				'group-emphasized-hover': '#0f172a',
+
+				'btn-emphasized': '#FFFFFF',
+				'btn-emphasized-text': '#FFFFFF',
+				'btn-emphasized-text-hover': '#000000',
+				'btn-emphasized-outline': '#FFFFFF',
 
 				input: '#4b5563',
 
@@ -56,6 +66,11 @@ export default {
 				'btn-hover': '#404040',
 				'group-emphasized': '#171717',
 				'group-emphasized-hover': '#262626',
+
+				'btn-emphasized': '#FFFFFF',
+				'btn-emphasized-text': '#FFFFFF',
+				'btn-emphasized-text-hover': '#000000',
+				'btn-emphasized-outline': '#FFFFFF',
 
 				input: '#3f3f46',
 

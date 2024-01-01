@@ -34,7 +34,7 @@
 	$: selectedTheme = getTheme($colorTheme);
 </script>
 
-<div data-theme={selectedTheme} class="transition-colors duration-300">
+<div data-theme={selectedTheme} class="transition-colors duration-500">
 	<div class="flex flex-row bg-base text-text h-screen w-screen">
 		<Sidebar />
 		<div class="p-6 w-full">
