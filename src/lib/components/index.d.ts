@@ -6,6 +6,8 @@ export class DirectoryInput extends SvelteComponent<{
 	input_id: string | null | undefined;
 	button_id: string | null | undefined;
 	autodetect?: boolean;
+	chosenDirectory?: string | null | undefined;
+	inputType: 'game_dir' | 'instances_dir';
 }> {}
 
 export class InstanceCard extends SvelteComponent<{

@@ -3,13 +3,16 @@
 
 	import { open } from '@tauri-apps/api/dialog';
 
+	type DirectoryInputType = 'game_dir' | 'instances_dir';
+
 	export let dialog_text: string = 'Select a directory';
 	export let placeholder: string = '';
 	export let input_id: string | null | undefined;
 	export let button_id: string | null | undefined;
 	export let autodetect: boolean | null | undefined;
+	export let inputType: DirectoryInputType;
 
-	let chosen_directory = '';
+	export let chosenDirectory = '';
 
 	async function chooseDirectory() {
 		const newDir = await open({
@@ -19,7 +22,7 @@
 		});
 
 		if (newDir != undefined) {
-			chosen_directory = newDir?.toString() || '';
+			chosenDirectory = newDir?.toString() || '';
 		}
 	}
 </script>
@@ -36,7 +39,8 @@
 		class="bg-transparent text-text grow px-3 focus:border-none focus:outline-none"
 		{placeholder}
 		id={input_id}
-		bind:value={chosen_directory}
+		bind:value={chosenDirectory}
+		disabled
 	/>
 	<button
 		class="flex gap-2 place-items-center btn-group-emphasized hover:bg-group-emphasized-hover hover:bg-opacity-55 transition-all duration-200 text-text py-2 px-7"

@@ -13,6 +13,9 @@
 	"tauri": {
 		"allowlist": {
 			"all": false,
+			"fs": {
+				"all": true
+			},
 			"shell": {
 				"all": false,
 				"execute": false,
@@ -31,6 +34,13 @@
 				"message": false,
 				"open": true,
 				"save": false
+			},
+			"http": {
+				"all": false,
+				"request": true
+			},
+			"path": {
+				"all": true
 			}
 		},
 		"bundle": {
@@ -48,7 +58,7 @@
 				"icons/icon.icns",
 				"icons/icon.ico"
 			],
-			"identifier": "com.lilydev.bg3_mod_manager",
+			"identifier": "com.lilydev.bg3mm",
 			"longDescription": "",
 			"macOS": {
 				"entitlements": null,

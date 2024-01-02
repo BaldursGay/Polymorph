@@ -5,7 +5,7 @@
 
 	import { appWindow } from '@tauri-apps/api/window';
 
-	import { colorTheme } from '$lib/stores.js';
+	import { colorTheme } from '$lib/stores/theme.js';
 
 	function getDeviceTheme(): string {
 		let currentTheme: string = 'dark';

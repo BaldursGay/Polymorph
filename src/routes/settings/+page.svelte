@@ -2,7 +2,8 @@
 	import { DirectoryInput } from '$lib/components/index.js';
 	import { Brush, ChevronDown } from 'lucide-svelte';
 
-	import { colorTheme } from '$lib/stores.js';
+	import { colorTheme } from '$lib/stores/theme.js';
+	import { appConfig } from '$lib/stores/config.js';
 
 	let selectedTheme: string = $colorTheme;
 </script>
@@ -23,8 +24,12 @@
 		<DirectoryInput
 			dialog_text="Select your game directory"
 			placeholder="C:\Users\Jade"
+			chosenDirectory={$appConfig.game_dir === null || $appConfig.game_dir === undefined
+				? null
+				: $appConfig.game_dir}
 			input_id="gamedir_input"
 			button_id="gamedir_button"
+			inputType="game_dir"
 			autodetect
 		/>
 	</div>
@@ -42,8 +47,13 @@
 		<DirectoryInput
 			dialog_text="Select your game directory"
 			placeholder="C:\Users\Jade"
+			chosenDirectory={$appConfig.instances_dir === null ||
+			$appConfig.instances_dir === undefined
+				? null
+				: $appConfig.instances_dir}
 			input_id="instancedir_input"
 			button_id="instancedir_button"
+			inputType="instances_dir"
 		/>
 	</div>
 	<div class="space-y-2">

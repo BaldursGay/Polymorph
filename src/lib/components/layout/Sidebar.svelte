@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { LayoutGrid, Plus, Settings, X } from 'lucide-svelte';
 
-	let createInstanceModalOpen = true;
+	let createInstanceModalOpen = false;
 </script>
 
 <div
