@@ -1,4 +1,5 @@
 import { SvelteComponent } from 'svelte';
+import type { DirectoryInputType } from '/types/components.js';
 
 export class DirectoryInput extends SvelteComponent<{
 	dialog_text: string;
@@ -7,7 +8,7 @@ export class DirectoryInput extends SvelteComponent<{
 	button_id: string | null | undefined;
 	autodetect?: boolean;
 	chosenDirectory?: string | null | undefined;
-	inputType: 'game_dir' | 'instances_dir';
+	inputType: DirectoryInputType;
 }> {}
 
 export class InstanceCard extends SvelteComponent<{

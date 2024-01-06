@@ -2,8 +2,7 @@
 	import { Folder, FolderSearch, FolderOpen } from 'lucide-svelte';
 
 	import { open } from '@tauri-apps/api/dialog';
-
-	type DirectoryInputType = 'game_dir' | 'instances_dir';
+	import type { DirectoryInputType } from '$lib/types/components.js';
 
 	export let dialog_text: string = 'Select a directory';
 	export let placeholder: string = '';

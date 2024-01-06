@@ -1,12 +1,16 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use crate::config::{get_config, get_config_file_json, get_config_path, AppConfig};
+use crate::{
+    config::{get_config, get_config_file_json, get_config_path, AppConfig},
+    util::open_from_path,
+};
 use std::{fs::File, io::prelude::*, sync::Mutex};
 use tauri::{api::path::app_data_dir, Config};
 
 mod config;
 mod error;
+mod util;
 
 pub struct AppState {
     pub config: Mutex<AppConfig>,
@@ -45,7 +49,10 @@ fn main() -> Result<(), error::Error> {
         .manage(AppState {
             config: Mutex::from(config),
         })
-        .invoke_handler(tauri::generate_handler![get_config_file_json])
+        .invoke_handler(tauri::generate_handler![
+            get_config_file_json,
+            open_from_path
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 

@@ -1,10 +1,7 @@
 import { invoke } from '@tauri-apps/api';
 import { writable } from 'svelte/store';
 
-interface AppConfig {
-	game_dir?: string;
-	instances_dir?: string;
-}
+import type { AppConfig } from '$lib/types/general.js';
 
 function createAppConfig() {
 	let dummy_var: AppConfig = {};
