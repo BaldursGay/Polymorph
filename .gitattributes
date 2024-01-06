@@ -1,0 +1,7 @@
+# Config files
+*.config.js linguist-vendored
+*.config.ts linguist-vendored
+
+# Boilerplate/generated files
+src/app.d.ts linguist-generated=true
+src/app.html linguist-generated=true
