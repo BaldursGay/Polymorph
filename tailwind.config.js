@@ -18,7 +18,7 @@ export default {
 
 				divider: '#6b7280',
 
-				'btn-hover': '#d1d5db',
+				'btn-hover': '#c9c9d1',
 				'group-emphasized': '#d1d5db',
 				'group-emphasized-hover': '#9ca3af',
 
@@ -63,7 +63,7 @@ export default {
 
 				divider: '#a1a1aa',
 
-				'btn-hover': '#404040',
+				'btn-hover': '#3f3f46',
 				'group-emphasized': '#171717',
 				'group-emphasized-hover': '#262626',
 

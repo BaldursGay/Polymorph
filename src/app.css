@@ -27,11 +27,11 @@
 
 	.btn-icon {
 		@apply flex relative place-items-center p-2 hover:bg-btn-hover hover:bg-opacity-50 text-xl rounded-lg dark:text-text;
-		@apply scale-100 active:scale-95 transition-opacity;
+		@apply scale-100 active:scale-95 transition-opacity aspect-square;
 	}
 
 	.btn-rounded {
-		@apply rounded-full;
+		@apply rounded-full aspect-square;
 	}
 
 	.btn-group-emphasized {

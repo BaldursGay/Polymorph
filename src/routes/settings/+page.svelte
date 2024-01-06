@@ -66,7 +66,7 @@
 			<span class="text-paragraph text-sm pt-[1px]">BG3 Manager app theme</span>
 		</label>
 		<div
-			class="flex place-items-center bg-input border border-gray-600 border-opacity-45 h-10 rounded-md overflow-hidden"
+			class="flex place-items-center bg-input border border-gray-600 border-opacity-45 h-10 rounded-lg overflow-hidden"
 		>
 			<div class="flex place-items-center btn-group-emphasized mr-2 px-2.5 m-0 h-full">
 				<Brush size="20" class="text-paragraph" />
