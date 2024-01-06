@@ -8,6 +8,8 @@ pub enum Error {
     TomlDeserialize(#[from] toml::de::Error),
     #[error("Tauri built-in directory error")]
     TauriDirectory,
+    #[error("Other error: {0}")]
+    Other(#[from] anyhow::Error),
     #[error("Unknown error")]
     Unknown,
 }

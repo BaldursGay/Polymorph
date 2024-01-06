@@ -1,10 +1,10 @@
 use serde::{Deserialize, Serialize};
 use std::{fs::read_to_string, path::PathBuf};
-use tauri::{api::path::app_config_dir, Config};
+use tauri::{api::path::app_config_dir, Config, State};
 
-use crate::error;
+use crate::{error, AppState};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct AppConfig {
     pub game_dir: Option<PathBuf>,
     pub instances_dir: PathBuf,
@@ -24,6 +24,6 @@ pub fn get_config_path() -> Result<PathBuf, error::Error> {
 }
 
 #[tauri::command]
-pub fn get_config_file_json() -> Result<AppConfig, error::Error> {
-    Ok(get_config(&get_config_path()?)?)
+pub fn get_config_file_json(state: State<AppState>) -> Result<AppConfig, error::Error> {
+    Ok(state.config.lock().unwrap().clone())
 }
