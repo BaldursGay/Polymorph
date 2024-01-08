@@ -1,5 +1,10 @@
 use crate::error::Error;
-use std::path::PathBuf;
+use std::{fs::metadata, path::PathBuf};
+
+pub fn is_path_writable(path: &PathBuf) -> Result<bool, Error> {
+    let path_meta = metadata(path)?;
+    Ok(!path_meta.permissions().readonly())
+}
 
 #[tauri::command]
 pub fn open_from_path(path: PathBuf) -> Result<(), Error> {

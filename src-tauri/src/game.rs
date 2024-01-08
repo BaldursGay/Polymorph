@@ -1,4 +1,5 @@
 use crate::{
+    config::write_config,
     error::{Error, PathError},
     AppState,
 };
@@ -12,6 +13,10 @@ pub fn autodetect_game_folder(state: State<AppState>) -> Result<(), Error> {
         Ok(path) => {
             let mut app_config_lock = state.config.lock().unwrap();
             app_config_lock.game_dir = Some(path);
+
+            let app_config = app_config_lock.clone();
+
+            write_config(app_config)?;
 
             Ok(())
         }

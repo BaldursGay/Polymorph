@@ -29,4 +29,6 @@ impl serde::Serialize for Error {
 pub enum PathError {
     #[error("Failed to auto-detect path")]
     AutoDetect,
+    #[error("Path not writable: {0}")]
+    NotWritable(String),
 }

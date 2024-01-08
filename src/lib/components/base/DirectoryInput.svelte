@@ -27,6 +27,16 @@
 
 		if (newDir != undefined) {
 			chosenDirectory = newDir?.toString() || '';
+
+			if (inputType === 'game_dir') {
+				await invoke('set_game_directory', { path: newDir.toString() })
+					.then(() => appConfig.updateConfig())
+					.catch((e: any) => console.error(e));
+			} else {
+				await invoke('set_instances_directory', { path: newDir.toString() })
+					.then(() => appConfig.updateConfig())
+					.catch((e: any) => console.error(e));
+			}
 		}
 	}
 

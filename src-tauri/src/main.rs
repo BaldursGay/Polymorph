@@ -2,7 +2,10 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use crate::{
-    config::{get_config, get_config_file_json, get_config_path, AppConfig},
+    config::{
+        get_config, get_config_file_json, get_config_path, set_game_directory,
+        set_instances_directory, AppConfig,
+    },
     game::autodetect_game_folder,
     util::open_from_path,
 };
@@ -58,8 +61,10 @@ fn main() -> Result<(), error::Error> {
         })
         .invoke_handler(tauri::generate_handler![
             autodetect_game_folder,
+            set_game_directory,
+            set_instances_directory,
             get_config_file_json,
-            open_from_path
+            open_from_path,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
