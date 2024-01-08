@@ -82,6 +82,9 @@ devDependencies:
   svelte-check:
     specifier: ^3.6.2
     version: 3.6.2(postcss@8.4.32)(svelte@4.2.8)
+  svelte-loading-spinners:
+    specifier: ^0.3.4
+    version: 0.3.4
   tailwindcss:
     specifier: ^3.4.0
     version: 3.4.0
@@ -2513,6 +2516,10 @@ packages:
       svelte: ^3.19.0 || ^4.0.0
     dependencies:
       svelte: 4.2.8
+    dev: true
+
+  /svelte-loading-spinners@0.3.4:
+    resolution: {integrity: sha512-vKaW71QMCBcTNijAGc0mUl8k3DQ66iYmp6MB8BMGCXyWk82bTrcLy8FOnSm9fE+8q6TwzD6PLUoYFHt0II93Xw==}
     dev: true
 
   /svelte-persisted-store@0.8.0(svelte@4.2.8):

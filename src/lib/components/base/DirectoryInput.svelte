@@ -1,17 +1,22 @@
 <script lang="ts">
-	import { Folder, FolderSearch, FolderOpen } from 'lucide-svelte';
+	import { Folder, FolderOpen } from 'lucide-svelte';
 
 	import { open } from '@tauri-apps/api/dialog';
+	import { invoke } from '@tauri-apps/api';
+
+	import { LoadingButton } from '$lib/components/base/index.js';
+
 	import type { DirectoryInputType } from '$lib/types/components.js';
+	import { appConfig } from '$lib/stores/config.js';
 
 	export let dialog_text: string = 'Select a directory';
 	export let placeholder: string = '';
-	export let input_id: string | null | undefined;
-	export let button_id: string | null | undefined;
-	export let autodetect: boolean | null | undefined;
+	export let input_id: string | null;
+	export let button_id: string | null;
+	export let autodetect: boolean | undefined;
 	export let inputType: DirectoryInputType;
 
-	export let chosenDirectory = '';
+	export let chosenDirectory: string | null | undefined = '';
 
 	async function chooseDirectory() {
 		const newDir = await open({
@@ -23,6 +28,23 @@
 		if (newDir != undefined) {
 			chosenDirectory = newDir?.toString() || '';
 		}
+	}
+
+	$: autodetectLoading = false;
+
+	async function autodetectDirectory() {
+		autodetectLoading = true;
+
+		await invoke('autodetect_game_folder')
+			.then(async () => {
+				await appConfig.updateConfig().then(() => {
+					autodetectLoading = false;
+				});
+			})
+			.catch((err: any) => {
+				console.log(`error! ${err}`);
+				autodetectLoading = false;
+			});
 	}
 </script>
 
@@ -50,12 +72,30 @@
 		Browse
 	</button>
 	{#if autodetect}
-		<button
+		<!-- <button
 			class="flex gap-2 place-items-center btn-group-emphasized hover:bg-group-emphasized-hover hover:bg-opacity-55 transition-all duration-200 text-text py-2 px-7 border-l border-gray-600 border-opacity-45"
 			id={button_id}
+			on:click={autodetectDirectory}
 		>
-			<FolderSearch size="20" />
-			Auto-detect
-		</button>
+			<div class="flex gap-2 place-items-center">
+				<div class="absolute -translate-x-7">
+					{#if autodetectLoading}
+						<div class="absolute" in:fade out:fade>
+							<Circle size="20" color="white" />
+						</div>
+					{:else}
+						<div class="absolute w-40" in:fade out:fade>
+							<FolderSearch size="20" />
+							Auto-detect
+						</div>
+					{/if}
+				</div>
+				<div class="invisible">Auto-detect</div>
+			</div>
+		</button> -->
+
+		<LoadingButton on:click={autodetectDirectory} loading={autodetectLoading}
+			>Auto-detect</LoadingButton
+		>
 	{/if}
 </div>

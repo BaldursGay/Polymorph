@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Brush, ChevronDown } from 'lucide-svelte';
-	import { DirectoryInput } from '$lib/components/index.js';
+	import { DirectoryInput } from '$lib/components/base/index.js';
 
 	import { colorTheme } from '$lib/stores/theme.js';
 	import { appConfig } from '$lib/stores/config.js';
@@ -54,6 +54,7 @@
 			input_id="instancedir_input"
 			button_id="instancedir_button"
 			inputType="instances_dir"
+			autodetect={false}
 		/>
 	</div>
 	<div class="space-y-2">

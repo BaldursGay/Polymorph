@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 
-	import { Sidebar } from '$lib/components/index.js';
+	import { Sidebar } from '$lib/components/layout/index.js';
 
 	import { appWindow } from '@tauri-apps/api/window';
 

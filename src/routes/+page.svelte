@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { InstanceCard } from '$lib/components/index.js';
+	import { InstanceCard } from '$lib/components/base/index.js';
 	import { appConfig } from '$lib/stores/config.js';
 
 	import { FolderOpen } from 'lucide-svelte';
@@ -19,8 +19,8 @@
 	</div>
 
 	<div class="flex flex-col space-y-2">
-		<InstanceCard title="Vanilla" />
-		<InstanceCard title="Vanilla+" />
-		<InstanceCard title="Heavily Modded" />
+		<InstanceCard title="Vanilla" instanceId="aegpaeign" />
+		<InstanceCard title="Vanilla+" instanceId="aegpaeign" />
+		<InstanceCard title="Heavily Modded" instanceId="aegpaeign" />
 	</div>
 </div>

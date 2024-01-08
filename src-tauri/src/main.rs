@@ -3,13 +3,15 @@
 
 use crate::{
     config::{get_config, get_config_file_json, get_config_path, AppConfig},
+    game::autodetect_game_folder,
     util::open_from_path,
 };
-use std::{fs::File, io::prelude::*, sync::Mutex};
+use std::{fs::File, io::prelude::*, path::PathBuf, sync::Mutex};
 use tauri::{api::path::app_data_dir, Config};
 
 mod config;
 mod error;
+mod game;
 mod util;
 
 pub struct AppState {
@@ -34,8 +36,13 @@ fn main() -> Result<(), error::Error> {
             }
         }
 
+        let game_dir: Option<PathBuf> = match game::detect_game_folder() {
+            Ok(dir) => Some(dir),
+            Err(_) => None,
+        };
+
         AppConfig {
-            game_dir: None,
+            game_dir: game_dir,
             instances_dir,
         }
     } else {
@@ -50,6 +57,7 @@ fn main() -> Result<(), error::Error> {
             config: Mutex::from(config),
         })
         .invoke_handler(tauri::generate_handler![
+            autodetect_game_folder,
             get_config_file_json,
             open_from_path
         ])

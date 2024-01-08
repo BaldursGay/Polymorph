@@ -9,7 +9,7 @@ function createAppConfig() {
 
 	return {
 		subscribe,
-		init: async () => {
+		updateConfig: async () => {
 			await invoke('get_config_file_json', {}).then((res: AppConfig) => {
 				set(res);
 			});

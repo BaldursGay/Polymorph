@@ -8,6 +8,8 @@ pub enum Error {
     TomlDeserialize(#[from] toml::de::Error),
     #[error("Tauri built-in directory error")]
     TauriDirectory,
+    #[error("Path error: {0}")]
+    PathError(#[from] PathError),
     #[error("Other error: {0}")]
     Other(#[from] anyhow::Error),
     #[error("Unknown error")]
@@ -21,4 +23,10 @@ impl serde::Serialize for Error {
     {
         serializer.serialize_str(self.to_string().as_ref())
     }
+}
+
+#[derive(Debug, thiserror::Error)]
+pub enum PathError {
+    #[error("Failed to auto-detect path")]
+    AutoDetect,
 }
