@@ -20,7 +20,7 @@ pub fn autodetect_game_folder(state: State<AppState>) -> Result<(), Error> {
 
             Ok(())
         }
-        Err(err) => return Err(Error::PathError(err)),
+        Err(err) => Err(Error::PathError(err)),
     }
 }
 

@@ -19,7 +19,7 @@ pub struct AppConfig {
 }
 
 pub fn get_config(config_path: &PathBuf) -> Result<AppConfig, Error> {
-    let config_string = read_to_string(&config_path)?;
+    let config_string = read_to_string(config_path)?;
     let new_config: AppConfig = toml::from_str(&config_string)?;
     Ok(new_config)
 }
@@ -28,7 +28,7 @@ pub fn get_config_path() -> Result<PathBuf, Error> {
     let app_config_dir = app_config_dir(&Config::default())
         .unwrap()
         .join("com.lilydev.bg3mm");
-    Ok(PathBuf::from(app_config_dir).join("config.toml"))
+    Ok(app_config_dir.join("config.toml"))
 }
 
 pub fn write_config(config: AppConfig) -> Result<(), Error> {

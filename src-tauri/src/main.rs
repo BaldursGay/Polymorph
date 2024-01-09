@@ -45,7 +45,7 @@ fn main() -> Result<(), error::Error> {
         };
 
         AppConfig {
-            game_dir: game_dir,
+            game_dir,
             instances_dir,
         }
     } else {
