@@ -32,23 +32,23 @@ export default {
 				'text-text': 'black'
 			},
 			dark: {
-				base: '#171717',
-				raised: '#262626',
+				base: '#18181b',
+				raised: '#27272a',
 
-				tooltip: '#4c4c4c',
+				tooltip: '#52525b',
 
 				divider: '#9ca3af',
 
-				'btn-hover': '#4c4c4c',
-				'group-emphasized': '#262626',
-				'group-emphasized-hover': '#202020',
+				'btn-hover': '#3f3f46',
+				'group-emphasized': '#27272a',
+				'group-emphasized-hover': '#26262b',
 
 				'btn-emphasized': '#FFFFFF',
 				'btn-emphasized-text': '#FFFFFF',
 				'btn-emphasized-text-hover': '#000000',
 				'btn-emphasized-outline': '#FFFFFF',
 
-				input: '#4c4c4c',
+				input: '#52525b',
 
 				'darker-text': '#e1e7f5',
 				text: '#e1e7f5',

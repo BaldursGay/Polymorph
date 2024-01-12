@@ -6,6 +6,8 @@ pub enum Error {
     TomlSerialize(#[from] toml::ser::Error),
     #[error("TOML deserializing error")]
     TomlDeserialize(#[from] toml::de::Error),
+    #[error("serde JSON error: {0}")]
+    SerdeJson(#[from] serde_json::Error),
     #[error("Tauri built-in directory error")]
     TauriDirectory,
     #[error("Path error: {0}")]
