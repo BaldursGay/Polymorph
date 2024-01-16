@@ -11,7 +11,14 @@ pub fn get_instances_index(state: State<AppState>) -> Result<InstanceIndex, Erro
 
 #[tauri::command]
 pub fn refresh_instances_index(state: State<AppState>) -> Result<(), Error> {
-    let new_index = get_instances_index_from_path(&state.config.lock().unwrap().instances_dir)?;
+    let new_index = get_instances_index_from_path(
+        &state
+            .config
+            .lock()
+            .unwrap()
+            .instances_dir
+            .join("instances.index.json"),
+    )?;
 
     let mut index_lock = state.instance_index.lock().unwrap();
     index_lock.instances = new_index.instances;

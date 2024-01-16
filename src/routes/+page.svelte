@@ -15,7 +15,7 @@
 
 		await invoke('refresh_instances_index', {})
 			.then(async () => {
-				// await instancesIndex.updateIndex().then(() => (refreshing = false));
+				await instancesIndex.updateIndex().then(() => (refreshing = false));
 			})
 			.catch((err: any) => console.error(err));
 
