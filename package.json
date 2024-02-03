@@ -27,6 +27,8 @@
 		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
+		"@skeletonlabs/skeleton": "^2.8.0",
+		"@skeletonlabs/tw-plugin": "^0.3.1",
 		"@sveltejs/adapter-auto": "^3.0.1",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@sveltejs/kit": "^2.0.6",
@@ -34,6 +36,7 @@
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@tauri-apps/cli": "^1.5.9",
 		"@types/eslint": "8.56.0",
+		"@types/node": "^20.11.16",
 		"@typescript-eslint/eslint-plugin": "^6.16.0",
 		"@typescript-eslint/parser": "^6.16.0",
 		"autoprefixer": "^10.4.16",
@@ -46,10 +49,8 @@
 		"publint": "^0.1.16",
 		"svelte": "^4.2.8",
 		"svelte-check": "^3.6.2",
-		"svelte-loading-spinners": "^0.3.4",
 		"tailwindcss": "^3.4.0",
 		"tslib": "^2.6.2",
-		"tw-colors": "^3.3.1",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10"
 	},

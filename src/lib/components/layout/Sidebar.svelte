@@ -62,17 +62,17 @@
 	</div>
 </div>
 
-<div class="flex flex-col justify-between w-72 bg-raised pt-2 pb-3 px-3">
+<!-- <div class="flex flex-col justify-between w-72 bg-raised pt-2 pb-3 px-3">
 	<div>
 		<h1 class="text-2xl font-medium text-emphasized ml-1 mb-4">BG3 Manager</h1>
 		<div class="divider"></div>
-		<a href="/" class="sidebar-item">
+		<a href="/" class="btn hover:variant-soft-primary sidebar-item">
 			<LayoutGrid />
 			Instances
 		</a>
 	</div>
 	<div class="flex gap-1">
-		<a href="/settings" class="sidebar-item grow">
+		<a href="/settings" class="btn hover:variant-soft-primary sidebar-item grow">
 			<Settings />
 			Settings
 		</a>
@@ -81,4 +81,57 @@
 			<Plus />
 		</button>
 	</div>
+</div> -->
+
+<div class="flex flex-col justify-between h-full">
+	<h1 class="text-2xl font-semibold p-2">BG3 Manager</h1>
+	<nav class="list-nav grow">
+		<ul class="h-full flex flex-col justify-between">
+			<li>
+				<a class="btn hover:variant-soft-primary justify-start gap-2" href="/">
+					<LayoutGrid />
+					Instances
+				</a>
+			</li>
+			<li>
+				<ul class="flex">
+					<li class="grow">
+						<a
+							class="btn hover:variant-soft-primary w-full justify-start gap-2"
+							href="/settings"
+						>
+							<Settings />
+							Settings
+						</a>
+					</li>
+					<li class="!m-0">
+						<button
+							class="btn-icon hover:variant-soft-primary rounded-[12px]"
+							on:click={() => (createInstanceModalOpen = true)}
+						>
+							<span>
+								<Plus size="22" />
+							</span>
+						</button>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<!-- <ul class="flex gap-2">
+		<li class="grow">
+			<a class="btn hover:variant-soft-primary w-full justify-start gap-2" href="/settings">
+				<Settings />
+				Settings
+			</a>
+		</li>
+		<li>
+			<button
+				class="btn-icon hover:variant-soft-primary rounded-[12px]"
+				on:click={() => (createInstanceModalOpen = true)}
+			>
+				<Plus />
+			</button>
+		</li>
+	</ul> -->
 </div>

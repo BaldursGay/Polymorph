@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+html,
+body {
+	@apply h-full overflow-hidden;
+}
+
+/* @layer components {
 	.link {
 		@apply text-blue-600 dark:text-blue-500 hover:underline;
 	}
@@ -47,4 +52,4 @@
 	.divider-vertical {
 		@apply bg-divider bg-opacity-10 mx-2 h-full w-0.5;
 	}
-}
+} */
