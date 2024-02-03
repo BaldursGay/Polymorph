@@ -1,12 +1,16 @@
 <script lang="ts">
 	import '../app.css';
 
+	import { initializeStores } from '@skeletonlabs/skeleton';
+	import { AppShell, Modal } from '@skeletonlabs/skeleton';
+
 	import { Sidebar } from '$lib/components/layout/index.js';
-	import { AppShell } from '@skeletonlabs/skeleton';
 
 	import { appWindow } from '@tauri-apps/api/window';
 
 	import { colorTheme } from '$lib/stores/theme.js';
+
+	initializeStores();
 
 	function getDeviceTheme(): string {
 		let currentTheme: string = 'dark';
@@ -39,13 +43,11 @@
 	<div
 		class="h-full text-surface-900 bg-surface-50 dark:text-surface-100 dark:bg-surface-900 transition-colors duration-500"
 	>
-		<!-- <div class="flex flex-row bg-base text-text h-screen w-screen">
-			<Sidebar />
-			<div class="p-6 w-full">
-				<slot />
-			</div>
-		</div> -->
-		<AppShell slotSidebarLeft="w-64 h-full p-2">
+		<Modal />
+		<AppShell
+			slotSidebarLeft="w-64 h-full p-2 bg-surface-500/25 rounded-r-lg"
+			slotPageContent="p-4"
+		>
 			<svelte:fragment slot="sidebarLeft">
 				<Sidebar />
 			</svelte:fragment>
