@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { InstanceCard } from '$lib/components/base/index.js';
+	import { InstanceCard } from '$lib/components/instance/index.js';
 	import { appConfig } from '$lib/stores/config.js';
 	import { instancesIndex } from '$lib/stores/instance.js';
 
