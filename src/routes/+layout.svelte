@@ -1,16 +1,19 @@
 <script lang="ts">
 	import '../app.css';
 
-	import { initializeStores } from '@skeletonlabs/skeleton';
+	import { appWindow } from '@tauri-apps/api/window';
+
+	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
+	import { initializeStores, storePopup } from '@skeletonlabs/skeleton';
+
 	import { AppShell, Modal } from '@skeletonlabs/skeleton';
 
 	import { Sidebar } from '$lib/components/layout/index.js';
 
-	import { appWindow } from '@tauri-apps/api/window';
-
 	import { colorTheme } from '$lib/stores/theme.js';
 
 	initializeStores();
+	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 
 	function getDeviceTheme(): string {
 		let currentTheme: string = 'dark';
