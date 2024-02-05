@@ -4,7 +4,7 @@
 	import { appWindow } from '@tauri-apps/api/window';
 
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
-	import { initializeStores, storePopup } from '@skeletonlabs/skeleton';
+	import { Toast, initializeStores, storePopup } from '@skeletonlabs/skeleton';
 
 	import { AppShell, Modal } from '@skeletonlabs/skeleton';
 
@@ -46,6 +46,7 @@
 	<div
 		class="h-full text-surface-900 bg-surface-50 dark:text-surface-100 dark:bg-surface-900 transition-colors duration-500"
 	>
+		<Toast position="br" zIndex="z-[1000]" />
 		<Modal />
 		<AppShell
 			slotSidebarLeft="w-64 h-full p-2 bg-surface-500/10 dark:bg-surface-500/25 rounded-r-lg"

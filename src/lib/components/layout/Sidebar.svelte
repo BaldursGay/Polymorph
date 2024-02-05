@@ -1,24 +1,19 @@
 <script lang="ts">
-	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
+	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { LayoutGrid, Plus, Settings, X } from 'lucide-svelte';
 
+	import { CreateInstanceModal } from '.';
+
 	const modalStore = getModalStore();
+	const modalComponent: ModalComponent = { ref: CreateInstanceModal };
 
 	const modal: ModalSettings = {
-		type: 'prompt',
-		title: 'Create Instance',
-		body: 'Create a new instance.',
-		valueAttr: {
-			type: 'text',
-			minlength: 1,
-			maxlength: 36,
-			required: true
-		},
-		response: (response: string) => console.log('thingy!: ', response)
+		type: 'component',
+		component: modalComponent
 	};
 </script>
 
-<div class="flex flex-col justify-between h-full">
+<div class="flex flex-col justify-between h-full gap-1.5">
 	<h1 class="text-2xl font-semibold p-2">BG3 Manager</h1>
 	<nav class="list-nav grow">
 		<ul class="h-full flex flex-col justify-between">
