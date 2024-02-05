@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { InstanceCard } from '$lib/components/base/index.js';
+	import { InstanceCard } from '$lib/components/instance/index.js';
 	import { appConfig } from '$lib/stores/config.js';
 	import { instancesIndex } from '$lib/stores/instance.js';
 
@@ -26,13 +26,19 @@
 </script>
 
 <div class="space-y-4">
-	<div class="flex justify-between space-x-3">
-		<h1 class="page-title">Instances</h1>
-		<div class="flex">
-			<button class="btn-icon" on:click={refreshInstancesIndex}>
+	<div class="flex justify-between place-items-center gap-3">
+		<h1 class="text-2xl font-semibold">Instances</h1>
+		<div class="flex gap-1">
+			<button
+				class="btn-icon hover:variant-soft-primary rounded-[12px]"
+				on:click={refreshInstancesIndex}
+			>
 				<RefreshCw class="text-text {refreshing ? 'animate-spin' : ''}" />
 			</button>
-			<button class="btn-icon" on:click={openInstancesFolder}>
+			<button
+				class="btn-icon hover:variant-soft-primary rounded-[12px]"
+				on:click={openInstancesFolder}
+			>
 				<FolderOpen class="text-text" />
 			</button>
 		</div>
@@ -46,8 +52,5 @@
 				<InstanceCard title={name} instanceId={id} />
 			{/each}
 		{/if}
-		<!-- <InstanceCard title="Vanilla" instanceId="aegpaeign" />
-		<InstanceCard title="Vanilla+" instanceId="aegpaeign" />
-		<InstanceCard title="Heavily Modded" instanceId="aegpaeign" /> -->
 	</div>
 </div>

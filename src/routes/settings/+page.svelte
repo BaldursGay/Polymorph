@@ -4,86 +4,60 @@
 
 	import { colorTheme } from '$lib/stores/theme.js';
 	import { appConfig } from '$lib/stores/config.js';
+	import { ListBox, ListBoxItem, popup, type PopupSettings } from '@skeletonlabs/skeleton';
 
-	let selectedTheme: string = $colorTheme;
+	const colorThemePopup: PopupSettings = {
+		event: 'click',
+		target: 'colorThemeCombobox',
+		placement: 'bottom',
+		closeQuery: '#colorThemeCombobox'
+	};
 </script>
 
-<div class="flex flex-col space-y-4">
-	<h1 class="page-title">Settings</h1>
-	<div class="space-y-2">
-		<label
-			for="gamedir_input"
-			class="flex text-lg place-items-center font-medium text-emphasized"
-		>
-			Game directory
-			<div class="mx-2 text-paragraph opacity-30 text-sm">|</div>
-			<span class="text-paragraph text-sm pt-[1px]"
-				>Path to your Baldur's Gate 3 game directory</span
-			>
-		</label>
-		<DirectoryInput
-			dialog_text="Select your game directory"
-			placeholder="C:\Users\Jade"
-			chosenDirectory={$appConfig.game_dir === null || $appConfig.game_dir === undefined
-				? null
-				: $appConfig.game_dir}
-			input_id="gamedir_input"
-			button_id="gamedir_button"
-			inputType="game_dir"
-			autodetect
-		/>
-	</div>
-	<div class="space-y-2">
-		<label
-			for="instancedir_input"
-			class="flex text-lg place-items-center font-medium text-emphasized"
-		>
-			Instance Directory
-			<div class="mx-2 text-paragraph opacity-30 text-sm">|</div>
-			<span class="text-paragraph text-sm pt-[1px]"
-				>Path to your instances folder (where instance files will be stored)</span
-			>
-		</label>
-		<DirectoryInput
-			dialog_text="Select your game directory"
-			placeholder="C:\Users\Jade"
-			chosenDirectory={$appConfig.instances_dir === null ||
-			$appConfig.instances_dir === undefined
-				? null
-				: $appConfig.instances_dir}
-			input_id="instancedir_input"
-			button_id="instancedir_button"
-			inputType="instances_dir"
-			autodetect={false}
-		/>
-	</div>
-	<div class="space-y-2">
-		<label
-			for="colortheme_input"
-			class="flex text-lg place-items-center font-medium text-emphasized"
-		>
-			Color Theme
-			<div class="mx-2 text-paragraph opacity-30 text-sm">|</div>
-			<span class="text-paragraph text-sm pt-[1px]">BG3 Manager app theme</span>
-		</label>
-		<div
-			class="flex place-items-center bg-input border border-gray-600 border-opacity-45 h-10 rounded-lg overflow-hidden"
-		>
-			<div class="flex place-items-center btn-group-emphasized mr-2 px-2.5 m-0 h-full">
+<div class="flex flex-col gap-3">
+	<h1 class="text-2xl font-semibold">Settings</h1>
+	<DirectoryInput
+		label="Game Directory"
+		dialog_text="Select your game directory"
+		placeholder="C:\Users\Jade"
+		chosenDirectory={$appConfig.game_dir === null || $appConfig.game_dir === undefined
+			? null
+			: $appConfig.game_dir}
+		input_id="gamedir_input"
+		button_id="gamedir_button"
+		inputType="game_dir"
+		autodetect
+	/>
+	<DirectoryInput
+		label="Instance Directory"
+		dialog_text="Select your game directory"
+		placeholder="C:\Users\Jade"
+		chosenDirectory={$appConfig.instances_dir === null || $appConfig.instances_dir === undefined
+			? null
+			: $appConfig.instances_dir}
+		input_id="instancedir_input"
+		button_id="instancedir_button"
+		inputType="instances_dir"
+		autodetect={false}
+	/>
+	<label class="label relative">
+		<span>Color Theme</span>
+		<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+			<div class="input-group-shim">
 				<Brush size="20" class="text-paragraph" />
 			</div>
-			<select
-				id="colortheme_input"
-				class="flex w-full h-10 px-2 text-text bg-input focus:outline-none appearance-none"
-				bind:value={selectedTheme}
-				on:change={() => colorTheme.set(selectedTheme)}
-			>
-				<option value="auto">Auto</option>
-				<option value="light">Light</option>
-				<option value="dark">Dark</option>
-				<option value="oled">OLED</option>
-			</select>
-			<ChevronDown class="mr-2" />
+			<button class="btn hover:scale-100" use:popup={colorThemePopup} id="colorThemeCombobox">
+				<span class="capitalize">{$colorTheme}</span>
+				<span><ChevronDown size="20" /></span>
+			</button>
 		</div>
-	</div>
+		<div class="card p-2 grow w-full" data-popup="colorThemeCombobox">
+			<ListBox active="variant-soft-primary">
+				<ListBoxItem bind:group={$colorTheme} name="medium" value="auto">Auto</ListBoxItem>
+				<ListBoxItem bind:group={$colorTheme} name="medium" value="light">Light</ListBoxItem
+				>
+				<ListBoxItem bind:group={$colorTheme} name="medium" value="dark">Dark</ListBoxItem>
+			</ListBox>
+		</div>
+	</label>
 </div>

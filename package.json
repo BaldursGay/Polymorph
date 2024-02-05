@@ -27,13 +27,17 @@
 		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
+		"@skeletonlabs/skeleton": "^2.8.0",
+		"@skeletonlabs/tw-plugin": "^0.3.1",
 		"@sveltejs/adapter-auto": "^3.0.1",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@sveltejs/kit": "^2.0.6",
 		"@sveltejs/package": "^2.2.5",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
+		"@tailwindcss/forms": "^0.5.7",
 		"@tauri-apps/cli": "^1.5.9",
 		"@types/eslint": "8.56.0",
+		"@types/node": "^20.11.16",
 		"@typescript-eslint/eslint-plugin": "^6.16.0",
 		"@typescript-eslint/parser": "^6.16.0",
 		"autoprefixer": "^10.4.16",
@@ -46,10 +50,8 @@
 		"publint": "^0.1.16",
 		"svelte": "^4.2.8",
 		"svelte-check": "^3.6.2",
-		"svelte-loading-spinners": "^0.3.4",
 		"tailwindcss": "^3.4.0",
 		"tslib": "^2.6.2",
-		"tw-colors": "^3.3.1",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10"
 	},
@@ -57,10 +59,13 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
+		"@floating-ui/dom": "^1.6.1",
+		"@fortawesome/free-solid-svg-icons": "^6.5.1",
 		"@popperjs/core": "^2.11.8",
 		"@tauri-apps/api": "^1.5.3",
 		"lucide-svelte": "^0.303.0",
 		"postcss-import": "^15.1.0",
+		"svelte-fa": "^4.0.2",
 		"svelte-persisted-store": "^0.8.0",
 		"tailwind-merge": "^2.2.0"
 	}
