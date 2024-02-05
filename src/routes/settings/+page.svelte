@@ -8,55 +8,32 @@
 	let selectedTheme: string = $colorTheme;
 </script>
 
-<div class="flex flex-col space-y-4">
-	<h1 class="page-title">Settings</h1>
-	<div class="space-y-2">
-		<label
-			for="gamedir_input"
-			class="flex text-lg place-items-center font-medium text-emphasized"
-		>
-			Game directory
-			<div class="mx-2 text-paragraph opacity-30 text-sm">|</div>
-			<span class="text-paragraph text-sm pt-[1px]"
-				>Path to your Baldur's Gate 3 game directory</span
-			>
-		</label>
-		<DirectoryInput
-			dialog_text="Select your game directory"
-			placeholder="C:\Users\Jade"
-			chosenDirectory={$appConfig.game_dir === null || $appConfig.game_dir === undefined
-				? null
-				: $appConfig.game_dir}
-			input_id="gamedir_input"
-			button_id="gamedir_button"
-			inputType="game_dir"
-			autodetect
-		/>
-	</div>
-	<div class="space-y-2">
-		<label
-			for="instancedir_input"
-			class="flex text-lg place-items-center font-medium text-emphasized"
-		>
-			Instance Directory
-			<div class="mx-2 text-paragraph opacity-30 text-sm">|</div>
-			<span class="text-paragraph text-sm pt-[1px]"
-				>Path to your instances folder (where instance files will be stored)</span
-			>
-		</label>
-		<DirectoryInput
-			dialog_text="Select your game directory"
-			placeholder="C:\Users\Jade"
-			chosenDirectory={$appConfig.instances_dir === null ||
-			$appConfig.instances_dir === undefined
-				? null
-				: $appConfig.instances_dir}
-			input_id="instancedir_input"
-			button_id="instancedir_button"
-			inputType="instances_dir"
-			autodetect={false}
-		/>
-	</div>
+<div class="flex flex-col gap-3">
+	<h1 class="text-2xl font-semibold">Settings</h1>
+	<DirectoryInput
+		label="Game Directory"
+		dialog_text="Select your game directory"
+		placeholder="C:\Users\Jade"
+		chosenDirectory={$appConfig.game_dir === null || $appConfig.game_dir === undefined
+			? null
+			: $appConfig.game_dir}
+		input_id="gamedir_input"
+		button_id="gamedir_button"
+		inputType="game_dir"
+		autodetect
+	/>
+	<DirectoryInput
+		label="Instance Directory"
+		dialog_text="Select your game directory"
+		placeholder="C:\Users\Jade"
+		chosenDirectory={$appConfig.instances_dir === null || $appConfig.instances_dir === undefined
+			? null
+			: $appConfig.instances_dir}
+		input_id="instancedir_input"
+		button_id="instancedir_button"
+		inputType="instances_dir"
+		autodetect={false}
+	/>
 	<div class="space-y-2">
 		<label
 			for="colortheme_input"

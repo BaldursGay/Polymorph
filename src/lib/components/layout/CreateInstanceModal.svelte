@@ -17,7 +17,7 @@
 	};
 
 	function onFormSubmit(): void {
-		if (instanceName !== undefined) {
+		if (instanceName !== undefined && instanceName !== '') {
 			console.log(instanceName);
 			modalStore.close();
 		} else {
