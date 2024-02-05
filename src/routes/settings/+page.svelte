@@ -1,16 +1,27 @@
 <script lang="ts">
-	import { Brush, ChevronDown } from 'lucide-svelte';
+	import { _ } from 'svelte-i18n';
+
+	import { Brush, ChevronDown, Gamepad2 } from 'lucide-svelte';
 	import { DirectoryInput } from '$lib/components/base/index.js';
 
 	import { colorTheme } from '$lib/stores/theme.js';
 	import { appConfig } from '$lib/stores/config.js';
 	import { ListBox, ListBoxItem, popup, type PopupSettings } from '@skeletonlabs/skeleton';
 
+	let gameVersion: 'dx11' | 'vulkan' = 'vulkan';
+
 	const colorThemePopup: PopupSettings = {
 		event: 'click',
 		target: 'colorThemeCombobox',
 		placement: 'bottom',
 		closeQuery: '#colorThemeCombobox'
+	};
+
+	const gameVersionPopup: PopupSettings = {
+		event: 'click',
+		target: 'gameVersionCombobox',
+		placement: 'bottom',
+		closeQuery: '#gameVersionCombobox'
 	};
 </script>
 
@@ -51,12 +62,38 @@
 				<span><ChevronDown size="20" /></span>
 			</button>
 		</div>
-		<div class="card p-2 grow w-full" data-popup="colorThemeCombobox">
+		<div class="card p-2 grow w-full z-10" data-popup="colorThemeCombobox">
 			<ListBox active="variant-soft-primary">
 				<ListBoxItem bind:group={$colorTheme} name="medium" value="auto">Auto</ListBoxItem>
 				<ListBoxItem bind:group={$colorTheme} name="medium" value="light">Light</ListBoxItem
 				>
 				<ListBoxItem bind:group={$colorTheme} name="medium" value="dark">Dark</ListBoxItem>
+			</ListBox>
+		</div>
+	</label>
+	<label class="label relative">
+		<span>Game Version</span>
+		<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+			<div class="input-group-shim">
+				<Gamepad2 size="20" class="text-paragraph" />
+			</div>
+			<button
+				class="btn hover:scale-100"
+				use:popup={gameVersionPopup}
+				id="gameVersionCombobox"
+			>
+				<span class="capitalize">{$_(`game_version.${gameVersion}`)}</span>
+				<span><ChevronDown size="20" /></span>
+			</button>
+		</div>
+		<div class="card p-2 grow w-full z-10" data-popup="gameVersionCombobox">
+			<ListBox active="variant-soft-primary">
+				<ListBoxItem bind:group={gameVersion} name="medium" value="vulkan"
+					>{$_('game_version.vulkan')}</ListBoxItem
+				>
+				<ListBoxItem bind:group={gameVersion} name="medium" value="dx11"
+					>{$_('game_version.dx11')}</ListBoxItem
+				>
 			</ListBox>
 		</div>
 	</label>

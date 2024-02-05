@@ -1,0 +1,13 @@
+{
+	"game_version": {
+		"vulkan": "Vulkan",
+		"dx11": "DirectX 11"
+	},
+	"page": {
+		"instance": {
+			"error": {
+				"404": "Failed to find instance."
+			}
+		}
+	}
+}
