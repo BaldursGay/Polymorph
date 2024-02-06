@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
 	import { getModalStore, getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
+	import { invoke } from '@tauri-apps/api';
+	import refreshInstancesIndex from '$lib/utils/instance';
 
 	export let parent: SvelteComponent;
 	const modalStore = getModalStore();
@@ -10,15 +12,25 @@
 	let instanceName: string;
 	let formValid: boolean = true;
 
+	const createdInstanceToast: ToastSettings = {
+		message: 'Successfully created new instance!',
+		hoverable: true,
+		background: 'variant-soft-success'
+	};
+
 	const nameErrorToast: ToastSettings = {
 		message: 'Invalid instance name!',
 		hoverable: true,
 		background: 'variant-soft-error'
 	};
 
-	function onFormSubmit(): void {
+	async function onFormSubmit(): Promise<void> {
 		if (instanceName !== undefined && instanceName !== '') {
-			console.log(instanceName);
+			invoke('create_instance', { instanceName: instanceName }).then(async () => {
+				await refreshInstancesIndex();
+				toastStore.trigger(createdInstanceToast);
+			});
+
 			modalStore.close();
 		} else {
 			formValid = false;

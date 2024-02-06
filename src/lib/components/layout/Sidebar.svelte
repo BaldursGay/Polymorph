@@ -2,7 +2,7 @@
 	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { LayoutGrid, Plus, Settings, X } from 'lucide-svelte';
 
-	import { CreateInstanceModal } from '.';
+	import { CreateInstanceModal } from '$lib/components/instance';
 
 	const modalStore = getModalStore();
 	const modalComponent: ModalComponent = { ref: CreateInstanceModal };

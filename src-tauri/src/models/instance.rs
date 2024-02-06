@@ -9,7 +9,6 @@ pub struct InstanceIndex {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct InstanceInfo {
     pub name: String,
-    pub description: Option<String>,
     pub id: Uuid,
     pub order_index: i32,
 }
