@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n';
+
 	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
 	import { LayoutGrid, Plus, Settings, X } from 'lucide-svelte';
 
@@ -14,13 +16,13 @@
 </script>
 
 <div class="flex flex-col justify-between h-full gap-1.5">
-	<h1 class="text-2xl font-semibold p-2">BG3 Manager</h1>
+	<h1 class="text-2xl font-semibold p-2">{$_('sidebar.title')}</h1>
 	<nav class="list-nav grow">
 		<ul class="h-full flex flex-col justify-between">
 			<li>
 				<a class="btn hover:variant-soft-primary justify-start gap-2" href="/">
 					<LayoutGrid />
-					Instances
+					{$_('sidebar.navigation.instances')}
 				</a>
 			</li>
 			<li>
@@ -31,7 +33,7 @@
 							href="/settings"
 						>
 							<Settings />
-							Settings
+							{$_('sidebar.navigation.settings')}
 						</a>
 					</li>
 					<li class="!m-0">

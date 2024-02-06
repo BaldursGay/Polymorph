@@ -7,7 +7,7 @@
 		"distDir": "../build"
 	},
 	"package": {
-		"productName": "mod-manager",
+		"productName": "polymorph",
 		"version": "0.1.0"
 	},
 	"tauri": {
@@ -58,7 +58,7 @@
 				"icons/icon.icns",
 				"icons/icon.ico"
 			],
-			"identifier": "com.lilydev.bg3mm",
+			"identifier": "com.lilydev.polymorph",
 			"longDescription": "",
 			"macOS": {
 				"entitlements": null,
@@ -88,7 +88,7 @@
 				"fullscreen": false,
 				"height": 800,
 				"resizable": true,
-				"title": "Jade's BG3 Mod Manager",
+				"title": "Polymorph - A Baldur's Gate 3 mod manager",
 				"width": 1400
 			}
 		]

@@ -1,4 +1,11 @@
 {
+	"sidebar": {
+		"title": "Polymorph",
+		"navigation": {
+			"settings": "Settings",
+			"instances": "Instances"
+		}
+	},
 	"settings": {
 		"game_version": {
 			"vulkan": "Vulkan",

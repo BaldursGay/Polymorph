@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { ArrowLeft, HeartCrack, Info, Trash2 } from 'lucide-svelte';
+	import { ArrowLeft, HeartCrack, MoreHorizontal, Play } from 'lucide-svelte';
 
 	export let data;
 </script>
@@ -11,10 +11,12 @@
 			<a class="btn-icon hover:variant-ghost-surface rounded-xl" href="/"><ArrowLeft /></a>
 			<h1 class="text-xl font-semibold">{data.instance.name}</h1>
 		</div>
-		<!-- <div class="card flex place-items-center gap-2 p-2">
-			<button class="btn-icon rounded-xl variant-soft-error"><Trash2 /></button>
-			<button class="btn-icon rounded-xl variant-outline"><Info /></button>
-		</div> -->
+		<div class="card flex place-items-center p-2">
+			<button class="btn-icon rounded-xl hover:variant-ghost-surface"><Play /></button>
+			<button class="btn-icon rounded-xl hover:variant-ghost-surface"
+				><MoreHorizontal /></button
+			>
+		</div>
 	</div>
 
 	<div class="flex grow place-self-center place-items-center gap-2.5">

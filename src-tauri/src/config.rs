@@ -27,7 +27,7 @@ pub fn get_config(config_path: &PathBuf) -> Result<AppConfig, Error> {
 pub fn get_config_path() -> Result<PathBuf, Error> {
     let app_config_dir = app_config_dir(&Config::default())
         .unwrap()
-        .join("com.lilydev.bg3mm");
+        .join("com.lilydev.polymorph");
     Ok(app_config_dir.join("config.toml"))
 }
 

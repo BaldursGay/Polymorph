@@ -38,7 +38,7 @@ impl AppState {
             Some(dir) => dir,
             None => return Err(error::Error::TauriDirectory),
         }
-        .join("com.lilydev.bg3mm")
+        .join("com.lilydev.polymorph")
         .join("instances");
 
         let config = if !config_path.exists() {

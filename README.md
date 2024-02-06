@@ -1,4 +1,4 @@
-# Jade's BG3 Mod Manager
+# Polymorph
 
 > **NOTE:**  
 > Everything in this codebase is subject to change, including the name.
