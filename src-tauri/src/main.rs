@@ -7,7 +7,10 @@ use crate::{
         set_instances_directory, AppConfig,
     },
     game::autodetect_game_folder,
-    instance::{create_instance, delete_instance, get_instances_index, refresh_instances_index},
+    instance::{
+        create_instance, delete_instance, get_instance_info, get_instances_index,
+        refresh_instances_index,
+    },
     models::instance::InstanceIndex,
     util::open_from_path,
 };
@@ -90,6 +93,7 @@ fn main() -> Result<(), error::Error> {
             autodetect_game_folder,
             create_instance,
             delete_instance,
+            get_instance_info,
             get_config_file_json,
             get_instances_index,
             open_from_path,

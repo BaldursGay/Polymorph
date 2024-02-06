@@ -13,7 +13,9 @@
 				"404": "Failed to find instance."
 			},
 			"no_instances": "No instances found!",
-			"create_an_instance": "Create an instance with the `+` icon in the bottom left!"
+			"create_an_instance": "Create an instance with the `+` icon in the bottom left!",
+			"no_mods": "No mods installed.",
+			"add_mods": "Drag mods here to add them to the instance!"
 		}
 	}
 }

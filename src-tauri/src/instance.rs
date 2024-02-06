@@ -4,6 +4,7 @@ use std::{
     path::PathBuf,
 };
 
+use anyhow::anyhow;
 use tauri::State;
 use uuid::Uuid;
 
@@ -53,6 +54,35 @@ pub fn delete_instance(instance_id: Uuid, state: State<AppState>) -> Result<(), 
     index_file.write_all(serde_json::to_string_pretty(&instance_index)?.as_bytes())?;
 
     Ok(())
+}
+
+#[tauri::command]
+pub fn get_instance_info(instance_id: Uuid, state: State<AppState>) -> Result<InstanceInfo, Error> {
+    let index: InstanceIndex = serde_json::from_str(
+        read_to_string(
+            state
+                .config
+                .lock()
+                .unwrap()
+                .instances_dir
+                .clone()
+                .join("instances.index.json"),
+        )?
+        .as_str(),
+    )
+    .unwrap();
+
+    let info: InstanceInfo = match index.instances.into_iter().find(|i| i.id == instance_id) {
+        Some(index) => index,
+        None => {
+            return Err(Error::Other(anyhow!(format!(
+                "Failed to find instance with ID `{}`",
+                instance_id,
+            ))))
+        }
+    };
+
+    Ok(info)
 }
 
 #[tauri::command]
