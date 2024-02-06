@@ -49,7 +49,7 @@
 		<Toast position="br" zIndex="z-[1000]" />
 		<Modal />
 		<AppShell
-			slotSidebarLeft="w-64 h-full p-2 bg-surface-500/10 dark:bg-surface-500/25 rounded-r-lg"
+			slotSidebarLeft="w-64 ml-2.5 my-2.5 p-2 card rounded-lg dark:shadow-xl"
 			slotPageContent="p-4"
 		>
 			<svelte:fragment slot="sidebarLeft">

@@ -1,7 +1,11 @@
 {
-	"game_version": {
-		"vulkan": "Vulkan",
-		"dx11": "DirectX 11"
+	"settings": {
+		"game_version": {
+			"vulkan": "Vulkan",
+			"dx11": "DirectX 11"
+		},
+		"skip_launcher": "Skip Launcher",
+		"use_steam": "Use Steam"
 	},
 	"page": {
 		"instance": {

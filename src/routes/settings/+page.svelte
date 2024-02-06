@@ -6,9 +6,17 @@
 
 	import { colorTheme } from '$lib/stores/theme.js';
 	import { appConfig } from '$lib/stores/config.js';
-	import { ListBox, ListBoxItem, popup, type PopupSettings } from '@skeletonlabs/skeleton';
+	import {
+		ListBox,
+		ListBoxItem,
+		popup,
+		SlideToggle,
+		type PopupSettings
+	} from '@skeletonlabs/skeleton';
 
 	let gameVersion: 'dx11' | 'vulkan' = 'vulkan';
+	let skipLauncher: boolean = false;
+	let useSteam: boolean = false;
 
 	const colorThemePopup: PopupSettings = {
 		event: 'click',
@@ -82,19 +90,31 @@
 				use:popup={gameVersionPopup}
 				id="gameVersionCombobox"
 			>
-				<span class="capitalize">{$_(`game_version.${gameVersion}`)}</span>
+				<span>{$_(`settings.game_version.${gameVersion}`)}</span>
 				<span><ChevronDown size="20" /></span>
 			</button>
 		</div>
 		<div class="card p-2 grow w-full z-10" data-popup="gameVersionCombobox">
 			<ListBox active="variant-soft-primary">
 				<ListBoxItem bind:group={gameVersion} name="medium" value="vulkan"
-					>{$_('game_version.vulkan')}</ListBoxItem
+					>{$_('settings.game_version.vulkan')}</ListBoxItem
 				>
 				<ListBoxItem bind:group={gameVersion} name="medium" value="dx11"
-					>{$_('game_version.dx11')}</ListBoxItem
+					>{$_('settings.game_version.dx11')}</ListBoxItem
 				>
 			</ListBox>
 		</div>
+	</label>
+	<label class="label flex justify-between place-items-center mt-1" for="skip-launcher-toggle">
+		<span class="text-lg font-semibold">{$_('settings.skip_launcher')}</span>
+		<SlideToggle
+			name="skip-launcher-toggle"
+			active="bg-primary-500"
+			bind:checked={skipLauncher}
+		/>
+	</label>
+	<label class="label flex justify-between place-items-center mt-1" for="use-steam-toggle">
+		<span class="text-lg font-semibold">{$_('settings.use_steam')}</span>
+		<SlideToggle name="use-steam-toggle" active="bg-primary-500" bind:checked={useSteam} />
 	</label>
 </div>
