@@ -24,7 +24,7 @@
 	let refreshing = false;
 </script>
 
-<div class="flex flex-col grow w-full h-full space-y-2">
+<div class="flex flex-col grow w-full h-full">
 	<div class="flex justify-between place-items-center gap-3">
 		<h1 class="text-2xl font-semibold">Instances</h1>
 		<div class="flex gap-1">

@@ -44,13 +44,13 @@
 
 <div data-theme="main-theme" class="{selectedTheme} h-full">
 	<div
-		class="h-full text-surface-900 bg-surface-50 dark:text-surface-100 dark:bg-surface-900 transition-colors duration-500"
+		class="p-2.5 h-full text-surface-900 bg-surface-50 dark:text-surface-100 dark:bg-surface-900 transition-colors duration-500"
 	>
 		<Toast position="br" zIndex="z-[1000]" />
 		<Modal />
 		<AppShell
-			slotSidebarLeft="w-64 ml-2.5 my-2.5 p-2 card rounded-lg dark:shadow-xl"
-			slotPageContent="p-4"
+			slotSidebarLeft="w-64 py-1 px-2 card dark:shadow-xl"
+			slotPageContent="pl-3.5 pr-1"
 		>
 			<svelte:fragment slot="sidebarLeft">
 				<Sidebar />
