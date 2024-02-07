@@ -1,41 +1,61 @@
 {
-	"sidebar": {
-		"title": "Polymorph",
-		"navigation": {
-			"settings": "Settings",
-			"instances": "Instances"
+	"modal": {
+		"create_instance": {
+			"action_row": {
+				"cancel": "Cancel",
+				"confirm": "Create Instance"
+			},
+			"description": "Create a new instance with a specified name.",
+			"form": {
+				"name": {
+					"label": "Name",
+					"placeholder": "New Instance..."
+				}
+			},
+			"title": "Create Instance",
+			"toast": {
+				"error": "Invalid instance name!",
+				"success": "Successfully created new instance!"
+			}
 		}
-	},
-	"settings": {
-		"game_version": {
-			"vulkan": "Vulkan",
-			"dx11": "DirectX 11"
-		},
-		"skip_launcher": "Skip Launcher",
-		"use_steam": "Use Steam"
 	},
 	"page": {
 		"instance": {
+			"add_mods": "Drag mods here to add them to the instance!",
+			"create_an_instance": "Create an instance with the `+` icon in the bottom left!",
 			"error": {
 				"404": "Failed to find instance."
 			},
 			"no_instances": "No instances found!",
-			"create_an_instance": "Create an instance with the `+` icon in the bottom left!",
-			"no_mods": "No mods installed.",
-			"add_mods": "Drag mods here to add them to the instance!"
+			"no_mods": "No mods installed."
 		},
 		"settings": {
-			"title": "Settings",
-			"launcher_settings": "Launcher Settings",
-			"game_settings": "Game Settings",
 			"about": {
-				"title": "About",
 				"app_version": "App Version",
-				"tauri_version": "Tauri Version"
+				"tauri_version": "Tauri Version",
+				"title": "About"
 			},
 			"action": {
 				"auto_detect": "Auto-detect Game"
-			}
+			},
+			"game_settings": "Game Settings",
+			"launcher_settings": "Launcher Settings",
+			"title": "Settings"
 		}
+	},
+	"settings": {
+		"game_version": {
+			"dx11": "DirectX 11",
+			"vulkan": "Vulkan"
+		},
+		"skip_launcher": "Skip Launcher",
+		"use_steam": "Use Steam"
+	},
+	"sidebar": {
+		"navigation": {
+			"instances": "Instances",
+			"settings": "Settings"
+		},
+		"title": "Polymorph"
 	}
 }

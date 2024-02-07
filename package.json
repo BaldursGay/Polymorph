@@ -1,5 +1,5 @@
 {
-	"name": "mod-manager",
+	"name": "polymorph",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
