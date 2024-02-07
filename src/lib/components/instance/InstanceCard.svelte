@@ -1,5 +1,6 @@
 <script lang="ts">
 	import refreshInstancesIndex from '$lib/utils/instance';
+	import placeholderIcon from '$lib/assets/placeholder/instance.png';
 	import {
 		clipboard,
 		getModalStore,
@@ -14,6 +15,7 @@
 
 	export let title: string;
 	export let instanceId: string;
+	export let instanceIconPath: string | undefined = undefined;
 
 	const toastStore = getToastStore();
 	const confirmDeleteToast: ToastSettings = {
@@ -89,16 +91,24 @@
 </div>
 
 <div class="card card-hover flex justify-between place-items-center">
-	<a class="text-lg font-semibold grow px-3 py-2" href="/instance/{instanceId}">{title}</a>
-	<div class="flex gap-1 my-2 mr-2">
-		<button class="btn-icon btn-icon-sm hover:variant-ghost-surface rounded-[12px] z-10"
+	<a class="flex grow p-2 gap-3" href="/instance/{instanceId}">
+		<img
+			class="rounded-lg"
+			width="75"
+			src={instanceIconPath || placeholderIcon}
+			alt={instanceIconPath ? `Instance '${title}' icon` : 'Generic instance icon'}
+		/>
+		<span class="text-lg font-semibold">{title}</span>
+	</a>
+	<div class="flex place-self-start gap-1 my-2 mr-2">
+		<button class="btn-icon hover:variant-ghost-surface rounded-[12px] z-10"
 			><Play size="18" /></button
 		>
-		<button class="btn-icon btn-icon-sm hover:variant-ghost-surface rounded-[12px]"
+		<button class="btn-icon hover:variant-ghost-surface rounded-[12px]"
 			><FolderOpen size="18" /></button
 		>
 		<button
-			class="btn-icon btn-icon-sm hover:variant-ghost-surface rounded-[12px]"
+			class="btn-icon hover:variant-ghost-surface rounded-[12px]"
 			use:popup={popupSettings}><MoreHorizontal size="18" /></button
 		>
 	</div>
