@@ -10,11 +10,18 @@
 				"name": {
 					"label": "Name",
 					"placeholder": "New Instance..."
+				},
+				"icon": {
+					"label": "Upload Icon"
 				}
 			},
 			"title": "Create Instance",
 			"toast": {
-				"error": "Invalid instance name!",
+				"error": {
+					"invalid_name": "Error: Invalid instance name!",
+					"no_file": "Error: No file selected!",
+					"invalid_type": "Error: Invalid file extension!"
+				},
 				"success": "Successfully created new instance!"
 			}
 		}
