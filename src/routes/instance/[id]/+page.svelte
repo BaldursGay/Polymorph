@@ -1,21 +1,29 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { ArrowLeft, HeartCrack, MoreHorizontal, Play } from 'lucide-svelte';
+	import { ArrowLeft, HeartCrack, Play } from 'lucide-svelte';
+
+	import placeholderIcon from '$lib/assets/placeholder/instance.png';
 
 	export let data;
 </script>
 
 <div class="flex flex-col grow h-full">
-	<div class="flex justify-between">
-		<div class="card flex place-items-center gap-2 p-2 pr-6">
-			<a class="btn-icon hover:variant-ghost-surface rounded-xl" href="/"><ArrowLeft /></a>
-			<h1 class="text-xl font-semibold">{data.instance.name}</h1>
+	<div class="card flex justify-between w-full p-2">
+		<div class="flex gap-3.5 place-items-center">
+			<div class="flex gap-2">
+				<a class="btn-icon hover:variant-ghost-surface rounded-xl" href="/"><ArrowLeft /></a
+				>
+				<img
+					class="rounded-xl shadow-lg"
+					width="50"
+					src={placeholderIcon}
+					alt="PLACEHOLDER!!! instance icon"
+				/>
+			</div>
+			<span class="text-2xl font-bold pb-1">{data.instance.name}</span>
 		</div>
-		<div class="card flex place-items-center p-2">
+		<div class="flex gap-1">
 			<button class="btn-icon rounded-xl hover:variant-ghost-surface"><Play /></button>
-			<button class="btn-icon rounded-xl hover:variant-ghost-surface"
-				><MoreHorizontal /></button
-			>
 		</div>
 	</div>
 

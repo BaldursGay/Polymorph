@@ -25,8 +25,8 @@
 </script>
 
 <div class="flex flex-col grow w-full h-full">
-	<div class="flex justify-between place-items-center gap-3">
-		<h1 class="text-2xl font-semibold">Instances</h1>
+	<div class="card flex justify-between place-items-center gap-3 p-2 pl-4">
+		<h1 class="text-2xl font-bold">Instances</h1>
 		<div class="flex gap-1">
 			<button
 				class="btn-icon hover:variant-soft-primary rounded-[12px]"

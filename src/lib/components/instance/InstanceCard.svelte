@@ -93,7 +93,7 @@
 <div class="card card-hover flex justify-between place-items-center">
 	<a class="flex grow p-2 gap-3" href="/instance/{instanceId}">
 		<img
-			class="rounded-lg"
+			class="rounded-xl"
 			width="75"
 			src={instanceIconPath || placeholderIcon}
 			alt={instanceIconPath ? `Instance '${title}' icon` : 'Generic instance icon'}

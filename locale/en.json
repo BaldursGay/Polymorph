@@ -23,6 +23,19 @@
 			"create_an_instance": "Create an instance with the `+` icon in the bottom left!",
 			"no_mods": "No mods installed.",
 			"add_mods": "Drag mods here to add them to the instance!"
+		},
+		"settings": {
+			"title": "Settings",
+			"launcher_settings": "Launcher Settings",
+			"game_settings": "Game Settings",
+			"about": {
+				"title": "About",
+				"app_version": "App Version",
+				"tauri_version": "Tauri Version"
+			},
+			"action": {
+				"auto_detect": "Auto-detect Game"
+			}
 		}
 	}
 }
