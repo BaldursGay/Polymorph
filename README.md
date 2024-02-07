@@ -12,3 +12,5 @@ A good portion of this mod manager is based off of Modrinth's [theseus](https://
 Licensed under the [MIT License](/LICENSE).
 
 Some icons are from [Lucide](https://lucide.dev/).
+
+[Tauri](https://github.com/tauri-apps) logo licensed under [CC-BY-NC-ND-4.0](https://spdx.org/licenses/CC-BY-NC-ND-4.0).

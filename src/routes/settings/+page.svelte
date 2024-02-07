@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 
-	import { Brush, ChevronDown, Gamepad2 } from 'lucide-svelte';
+	import { Brush, ChevronDown, Code2, Gamepad2 } from 'lucide-svelte';
 	import { DirectoryInput } from '$lib/components/base/index.js';
 
 	import { colorTheme } from '$lib/stores/theme.js';
@@ -14,6 +14,7 @@
 		type PopupSettings
 	} from '@skeletonlabs/skeleton';
 	import { getName, getTauriVersion, getVersion } from '@tauri-apps/api/app';
+	import { Tauri } from '$lib/components/icons';
 
 	let gameVersion: 'dx11' | 'vulkan' = 'vulkan';
 	let skipLauncher: boolean = false;
@@ -149,21 +150,29 @@
 	</div>
 	<div class="card p-4 space-y-3">
 		<h2 class="text-xl font-semibold">{$_('page.settings.about.title')}</h2>
-		<div class="flex gap-2">
-			<span class="font-semibold">{$_('page.settings.about.app_version')}:</span>
-			<span>
-				{#await getVersion() then res}
-					v{res}
-				{/await}
-			</span>
-		</div>
-		<div class="flex gap-2">
-			<span class="font-semibold">{$_('page.settings.about.tauri_version')}:</span>
-			<span>
-				{#await getTauriVersion() then res}
-					v{res}
-				{/await}
-			</span>
+		<div class="flex gap-6">
+			<div class="flex place-items-center gap-3">
+				<Code2 size="40" />
+				<div class="flex flex-col">
+					<span class="font-semibold">{$_('page.settings.about.app_version')}</span>
+					<span>
+						{#await getVersion() then res}
+							v{res}
+						{/await}
+					</span>
+				</div>
+			</div>
+			<div class="flex place-items-center gap-2.5">
+				<Tauri size="40" />
+				<div class="flex flex-col">
+					<span class="font-semibold">{$_('page.settings.about.tauri_version')}</span>
+					<span>
+						{#await getTauriVersion() then res}
+							v{res}
+						{/await}
+					</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
