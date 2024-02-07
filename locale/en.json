@@ -5,7 +5,7 @@
 				"cancel": "Cancel",
 				"confirm": "Create Instance"
 			},
-			"description": "Create a new instance with a specified name.",
+			"description": "Create a new instance with a specified name and, optionally, icon.",
 			"form": {
 				"name": {
 					"label": "Name",
