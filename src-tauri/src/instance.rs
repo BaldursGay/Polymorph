@@ -4,9 +4,9 @@ use std::{
     path::PathBuf,
 };
 
-use anyhow::anyhow;
 use tauri::State;
 use uuid::Uuid;
+use walkdir::WalkDir;
 
 use crate::{
     error::Error,
@@ -31,15 +31,13 @@ pub fn create_instance(
 
     create_dir_all(&instance_dir.join(new_instance_id.to_string()))?;
 
-    let mut instance_index: InstanceIndex =
-        serde_json::from_str(read_to_string(instance_dir.join("instances.index.json"))?.as_str())
-            .unwrap();
+    let mut instance_file = File::create(
+        instance_dir
+            .join(new_instance_id.to_string())
+            .join("instance.json"),
+    )?;
 
-    instance_index.instances.push(new_instance);
-
-    let mut index_file = File::create(instance_dir.join("instances.index.json"))?;
-
-    index_file.write_all(serde_json::to_string_pretty(&instance_index)?.as_bytes())?;
+    instance_file.write_all(serde_json::to_string_pretty(&new_instance)?.as_bytes())?;
 
     match image_path {
         Some(path) => {
@@ -76,58 +74,55 @@ pub fn delete_instance(instance_id: Uuid, state: State<AppState>) -> Result<(), 
 
 #[tauri::command]
 pub fn get_instance_info(instance_id: Uuid, state: State<AppState>) -> Result<InstanceInfo, Error> {
-    let index: InstanceIndex = serde_json::from_str(
-        read_to_string(
-            state
-                .config
-                .lock()
-                .unwrap()
-                .instances_dir
-                .clone()
-                .join("instances.index.json"),
-        )?
-        .as_str(),
-    )
-    .unwrap();
+    let instances_dir = state.config.lock().unwrap().instances_dir.clone();
 
-    let info: InstanceInfo = match index.instances.into_iter().find(|i| i.id == instance_id) {
-        Some(index) => index,
-        None => {
-            return Err(Error::Other(anyhow!(format!(
-                "Failed to find instance with ID `{}`",
-                instance_id,
-            ))))
-        }
-    };
+    let file = instances_dir
+        .join(instance_id.to_string())
+        .join("instance.json");
+
+    let info: InstanceInfo = serde_json::from_str(&read_to_string(file)?)?;
 
     Ok(info)
 }
 
 #[tauri::command]
-pub fn get_instances_index(state: State<AppState>) -> Result<InstanceIndex, Error> {
-    Ok(state.instance_index.lock().unwrap().clone())
-}
+pub fn get_instances(state: State<AppState>) -> Result<Vec<InstanceInfo>, Error> {
+    let instances_dir = state.config.lock().unwrap().instances_dir.clone();
+    let instance_dirs: Vec<PathBuf> = WalkDir::new(&instances_dir)
+        .into_iter()
+        .filter_map(|e| match e {
+            Ok(entry) => {
+                if entry.path().is_dir()
+                    && Uuid::parse_str(entry.file_name().to_str().unwrap()).is_ok()
+                {
+                    return Some(entry.path().to_path_buf());
+                }
+                return None;
+            }
+            Err(_) => return None,
+        })
+        .collect();
 
-#[tauri::command]
-pub fn refresh_instances_index(state: State<AppState>) -> Result<(), Error> {
-    let new_index = get_instances_index_from_path(
-        &state
-            .config
-            .lock()
-            .unwrap()
-            .instances_dir
-            .join("instances.index.json"),
-    )?;
+    let instances_info: Vec<InstanceInfo> = instance_dirs
+        .into_iter()
+        .filter_map(|e| {
+            let instance_info = e.join("instance.json");
+            if instance_info.exists() {
+                let instance_info_string = match read_to_string(instance_info) {
+                    Ok(info) => info,
+                    Err(_) => return None,
+                };
 
-    let mut index_lock = state.instance_index.lock().unwrap();
-    index_lock.instances = new_index.instances;
+                let info: InstanceInfo = match serde_json::from_str(&instance_info_string) {
+                    Ok(info) => info,
+                    Err(_) => return None,
+                };
 
-    Ok(())
-}
+                return Some(info);
+            }
+            None
+        })
+        .collect();
 
-pub fn get_instances_index_from_path(path: &PathBuf) -> Result<InstanceIndex, Error> {
-    let index_string = read_to_string(&path)?;
-    let index: InstanceIndex = serde_json::from_str(&index_string)?;
-
-    Ok(index)
+    Ok(instances_info)
 }

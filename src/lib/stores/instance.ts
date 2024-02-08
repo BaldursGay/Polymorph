@@ -1,22 +1,22 @@
 import { invoke } from '@tauri-apps/api';
 import { writable } from 'svelte/store';
 
-import type { InstancesIndex } from '$lib/types/general.js';
+import type { InstanceInfo } from '$lib/types/instance';
 
-function createInstancesIndex() {
-	let dummy: InstancesIndex = { instances: [] };
+function getInstances() {
+	let dummy: InstanceInfo[] = [];
 	const { subscribe, set } = writable(dummy);
 
 	return {
 		subscribe,
-		updateIndex: async () => {
-			await invoke('get_instances_index', {})
-				.then((res: InstancesIndex) => {
-					set(res);
+		updateInstances: async () => {
+			await invoke('get_instances', {})
+				.then((value: InstanceInfo[]) => {
+					set(value);
 				})
 				.catch((err: string) => console.error(err));
 		}
 	};
 }
 
-export const instancesIndex = createInstancesIndex();
+export const instances = getInstances();

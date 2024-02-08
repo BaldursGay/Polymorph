@@ -1,6 +1,6 @@
 <script lang="ts">
-	import refreshInstancesIndex from '$lib/utils/instance';
 	import placeholderIcon from '$lib/assets/placeholder/instance.png';
+	import refreshInstances from '$lib/utils/instance';
 	import {
 		clipboard,
 		getModalStore,
@@ -54,7 +54,7 @@
 
 	async function deleteInstanceHandler(): Promise<void> {
 		invoke('delete_instance', { instanceId: instanceId }).then(
-			async () => await refreshInstancesIndex()
+			async () => await refreshInstances()
 		);
 	}
 </script>

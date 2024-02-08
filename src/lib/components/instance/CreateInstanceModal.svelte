@@ -8,7 +8,7 @@
 	import { Upload } from 'lucide-svelte';
 
 	import instanceIconPlaceholder from '$lib/assets/placeholder/instance.png';
-	import refreshInstancesIndex from '$lib/utils/instance';
+	import refreshInstances from '$lib/utils/instance';
 
 	export let parent: SvelteComponent;
 	const modalStore = getModalStore();
@@ -39,7 +39,7 @@
 				instanceName: instanceName,
 				imagePath: instanceIconPath || null
 			}).then(async () => {
-				await refreshInstancesIndex();
+				await refreshInstances();
 				toastStore.trigger(createdInstanceToast);
 			});
 

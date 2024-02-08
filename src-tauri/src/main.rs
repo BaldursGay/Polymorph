@@ -7,14 +7,9 @@ use crate::{
         set_instances_directory, AppConfig,
     },
     game::autodetect_game_folder,
-    instance::{
-        create_instance, delete_instance, get_instance_info, get_instances_index,
-        refresh_instances_index,
-    },
-    models::instance::InstanceIndex,
+    instance::{create_instance, delete_instance, get_instance_info, get_instances},
     util::open_from_path,
 };
-use instance::get_instances_index_from_path;
 use std::{fs::File, io::prelude::*, path::PathBuf, sync::Mutex};
 use tauri::{api::path::app_data_dir, Config};
 
@@ -27,7 +22,6 @@ mod util;
 
 pub struct AppState {
     pub config: Mutex<AppConfig>,
-    pub instance_index: Mutex<InstanceIndex>,
 }
 
 impl AppState {
@@ -65,21 +59,8 @@ impl AppState {
         let mut config_file = File::create(&config_path)?;
         config_file.write_all(toml::to_string_pretty(&config)?.as_bytes())?;
 
-        let instances_index_path = config.instances_dir.join("instances.index.json");
-
-        let instance_index: InstanceIndex = if instances_index_path.exists() {
-            get_instances_index_from_path(&instances_index_path)?
-        } else {
-            let index = InstanceIndex { instances: vec![] };
-            let mut index_file = File::create(&instances_index_path)?;
-            index_file.write_all(serde_json::to_string_pretty(&index)?.as_bytes())?;
-
-            index
-        };
-
         Ok(AppState {
             config: Mutex::from(config),
-            instance_index: Mutex::from(instance_index),
         })
     }
 }
@@ -93,11 +74,10 @@ fn main() -> Result<(), error::Error> {
             autodetect_game_folder,
             create_instance,
             delete_instance,
+            get_instances,
             get_instance_info,
             get_config_file_json,
-            get_instances_index,
             open_from_path,
-            refresh_instances_index,
             set_game_directory,
             set_instances_directory,
         ])

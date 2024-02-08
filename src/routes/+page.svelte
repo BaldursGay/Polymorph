@@ -6,19 +6,18 @@
 
 	import { InstanceCard } from '$lib/components/instance/index.js';
 
-	import { appConfig } from '$lib/stores/config.js';
-	import { instancesIndex } from '$lib/stores/instance.js';
+	import refreshInstances from '$lib/utils/instance';
 
-	import refreshInstancesIndex from '$lib/utils/instance';
+	import { appConfig } from '$lib/stores/config.js';
+	import { instances } from '$lib/stores/instance.js';
 
 	function openInstancesFolder() {
 		invoke('open_from_path', { path: $appConfig.instances_dir });
 	}
 
-	async function refreshInstancesIndexHandler() {
+	async function refreshHandler() {
 		refreshing = true;
-
-		await refreshInstancesIndex().then(() => (refreshing = false));
+		await refreshInstances().then(() => (refreshing = false));
 	}
 
 	let refreshing = false;
@@ -30,7 +29,7 @@
 		<div class="flex gap-1">
 			<button
 				class="btn-icon hover:variant-soft-primary rounded-[12px]"
-				on:click={refreshInstancesIndexHandler}
+				on:click={refreshHandler}
 			>
 				<RefreshCw class="text-text {refreshing ? 'animate-spin' : ''}" />
 			</button>
@@ -44,7 +43,7 @@
 	</div>
 
 	<div class="flex flex-col justify-center space-y-2 h-full">
-		{#if $instancesIndex.instances.length === 0}
+		{#if $instances.length === 0}
 			<div class="flex place-self-center place-items-center gap-2.5">
 				<Swords class="mt-0.5" size="64" />
 				<div class="flex flex-col gap-1">
@@ -56,7 +55,7 @@
 			</div>
 		{:else}
 			<div class="flex flex-col grow space-y-2.5">
-				{#each $instancesIndex.instances as { order_index, id, name, description }}
+				{#each $instances as { order_index, id, name }}
 					<InstanceCard title={name} instanceId={id} />
 				{/each}
 			</div>

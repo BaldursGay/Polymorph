@@ -1,10 +1,10 @@
-import { instancesIndex } from '$lib/stores/instance';
+import { instances } from '$lib/stores/instance';
 import { invoke } from '@tauri-apps/api';
 
-export default async function refreshInstancesIndex(): Promise<void> {
-	await invoke('refresh_instances_index', {})
+export default async function refreshInstances(): Promise<void> {
+	await invoke('get_instances', {})
 		.then(async () => {
-			await instancesIndex.updateIndex();
+			await instances.updateInstances();
 		})
 		.catch((err: any) => console.error(err));
 }

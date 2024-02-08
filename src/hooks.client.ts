@@ -1,5 +1,4 @@
 import { appConfig } from '$lib/stores/config.js';
-import { instancesIndex } from '$lib/stores/instance.js';
+import { instances } from '$lib/stores/instance';
 
-await appConfig.updateConfig();
-await instancesIndex.updateIndex();
+await instances.updateInstances();
