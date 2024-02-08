@@ -4,12 +4,7 @@
 	import type { SvelteComponent } from 'svelte';
 	import { invoke, tauri } from '@tauri-apps/api';
 	import { open } from '@tauri-apps/api/dialog';
-	import {
-		FileButton,
-		getModalStore,
-		getToastStore,
-		type ToastSettings
-	} from '@skeletonlabs/skeleton';
+	import { getModalStore, getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
 	import { Upload } from 'lucide-svelte';
 
 	import instanceIconPlaceholder from '$lib/assets/placeholder/instance.png';
@@ -96,22 +91,13 @@
 						name="instanceNameInput"
 					/>
 				</label>
-				<!-- <FileButton
+				<button
 					name="instanceIconUploadButton"
-					button="btn variant-ghost hover:variant-filled"
-					width="w-full"
-					accept=".png,.jpg,.jpeg"
-					on:change={handleReadFile}
+					class="btn variant-ghost-surface"
+					on:click={handleReadFile}
 				>
 					<Upload size="20" />
 					<span>{$_('modal.create_instance.form.icon.label')}</span>
-				</FileButton> -->
-				<button
-					name="instanceIconUploadButton"
-					class="btn variant-ghost hover:variant-filled"
-					on:click={handleReadFile}
-				>
-					{$_('modal.create_instance.form.icon.label')}
 				</button>
 			</form>
 		</div>
