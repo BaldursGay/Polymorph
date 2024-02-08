@@ -13,7 +13,7 @@
 		SlideToggle,
 		type PopupSettings
 	} from '@skeletonlabs/skeleton';
-	import { getName, getTauriVersion, getVersion } from '@tauri-apps/api/app';
+	import { getTauriVersion, getVersion } from '@tauri-apps/api/app';
 	import { Tauri } from '$lib/components/icons';
 
 	let gameVersion: 'dx11' | 'vulkan' = 'vulkan';
@@ -33,11 +33,6 @@
 		placement: 'bottom',
 		closeQuery: '#gameVersionCombobox'
 	};
-
-	async function getAppName() {
-		let name: string = '';
-		return await getName();
-	}
 </script>
 
 <div class="flex flex-col grow gap-3">
@@ -75,7 +70,7 @@
 			autodetect={false}
 		/>
 		<label class="label relative">
-			<span>Color Theme</span>
+			<span>{$_('settings.theme.title')}</span>
 			<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
 				<div class="input-group-shim">
 					<Brush size="20" class="text-paragraph" />
@@ -85,20 +80,20 @@
 					use:popup={colorThemePopup}
 					id="colorThemeCombobox"
 				>
-					<span class="capitalize">{$colorTheme}</span>
+					<span class="capitalize">{$_(`settings.theme.${$colorTheme}`)}</span>
 					<span><ChevronDown size="20" /></span>
 				</button>
 			</div>
 			<div class="card p-2 grow w-full z-10" data-popup="colorThemeCombobox">
 				<ListBox active="variant-soft-primary">
 					<ListBoxItem bind:group={$colorTheme} name="medium" value="auto"
-						>Auto</ListBoxItem
+						>{$_('settings.theme.auto')}</ListBoxItem
 					>
 					<ListBoxItem bind:group={$colorTheme} name="medium" value="light"
-						>Light</ListBoxItem
+						>{$_('settings.theme.light')}</ListBoxItem
 					>
 					<ListBoxItem bind:group={$colorTheme} name="medium" value="dark"
-						>Dark</ListBoxItem
+						>{$_('settings.theme.dark')}</ListBoxItem
 					>
 				</ListBox>
 			</div>
@@ -107,7 +102,7 @@
 	<div class="card p-4 space-y-3">
 		<h2 class="text-xl font-semibold">{$_('page.settings.game_settings')}</h2>
 		<label class="label relative">
-			<span>Game Version</span>
+			<span>{$_('settings.game_version.title')}</span>
 			<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
 				<div class="input-group-shim">
 					<Gamepad2 size="20" class="text-paragraph" />
@@ -150,7 +145,7 @@
 	</div>
 	<div class="card p-4 space-y-3">
 		<h2 class="text-xl font-semibold">{$_('page.settings.about.title')}</h2>
-		<div class="flex gap-6">
+		<div class="flex place-items-center gap-6">
 			<div class="flex place-items-center gap-3">
 				<Code2 size="40" />
 				<div class="flex flex-col">
