@@ -11,8 +11,8 @@ function getInstances() {
 		subscribe,
 		updateInstances: async () => {
 			await invoke('get_instances', {})
-				.then((value: InstanceInfo[]) => {
-					set(value);
+				.then((value) => {
+					set(value as InstanceInfo[]);
 				})
 				.catch((err: string) => console.error(err));
 		}
