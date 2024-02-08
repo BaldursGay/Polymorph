@@ -17,6 +17,7 @@
 
 	let instanceIcon: string | string[] | null | undefined = undefined;
 	let instanceIconSrc: string | undefined = undefined;
+	let instanceIconPath: string | undefined = undefined;
 	let instanceName: string;
 	let formValid: boolean = true;
 
@@ -35,8 +36,8 @@
 	async function onFormSubmit(): Promise<void> {
 		if (instanceName !== undefined && instanceName !== '') {
 			invoke('create_instance', {
-				instanceName: instanceName
-				// iconPath: instanceIconSrc ? instanceIconSrc : null
+				instanceName: instanceName,
+				imagePath: instanceIconPath || null
 			}).then(async () => {
 				await refreshInstancesIndex();
 				toastStore.trigger(createdInstanceToast);
@@ -51,9 +52,9 @@
 
 	// modified from @modrinth/theseus:
 	// https://github.com/modrinth/theseus/blob/3ff0ff238a4360960a8fee26d45094f92c8fefc5/theseus_gui/src/components/ui/InstanceCreationModal.vue#L383
-	async function handleReadFile() {
+	async function handleUploadFile() {
 		instanceIcon = await open({
-			title: 'Select an instance image',
+			title: $_('modal.create_instance.dialog'),
 			multiple: false,
 			filters: [
 				{
@@ -65,6 +66,7 @@
 
 		if (!instanceIcon) return;
 
+		instanceIconPath = instanceIcon.toString();
 		instanceIconSrc = tauri.convertFileSrc(instanceIcon.toString());
 	}
 </script>
@@ -94,7 +96,7 @@
 				<button
 					name="instanceIconUploadButton"
 					class="btn variant-ghost-surface"
-					on:click={handleReadFile}
+					on:click={handleUploadFile}
 				>
 					<Upload size="20" />
 					<span>{$_('modal.create_instance.form.icon.label')}</span>

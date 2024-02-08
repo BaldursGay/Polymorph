@@ -23,7 +23,8 @@
 					"invalid_type": "Error: Invalid file extension!"
 				},
 				"success": "Successfully created new instance!"
-			}
+			},
+			"dialog": "Select an instance image"
 		}
 	},
 	"page": {

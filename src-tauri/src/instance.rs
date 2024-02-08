@@ -1,5 +1,5 @@
 use std::{
-    fs::{create_dir_all, read_to_string, remove_dir_all, File},
+    fs::{copy, create_dir_all, read_to_string, remove_dir_all, File},
     io::Write,
     path::PathBuf,
 };
@@ -15,7 +15,11 @@ use crate::{
 };
 
 #[tauri::command]
-pub fn create_instance(instance_name: String, state: State<AppState>) -> Result<(), Error> {
+pub fn create_instance(
+    instance_name: String,
+    image_path: Option<PathBuf>,
+    state: State<AppState>,
+) -> Result<(), Error> {
     let instance_dir = state.config.lock().unwrap().instances_dir.clone();
     let new_instance_id = Uuid::new_v4();
 
@@ -36,6 +40,20 @@ pub fn create_instance(instance_name: String, state: State<AppState>) -> Result<
     let mut index_file = File::create(instance_dir.join("instances.index.json"))?;
 
     index_file.write_all(serde_json::to_string_pretty(&instance_index)?.as_bytes())?;
+
+    match image_path {
+        Some(path) => {
+            let file_extension = &*path.extension().unwrap().to_str().unwrap();
+
+            copy(
+                &path,
+                &instance_dir
+                    .join(&new_instance_id.to_string())
+                    .join(format!("instance.{}", file_extension)),
+            )?;
+        }
+        None => {}
+    }
 
     Ok(())
 }
