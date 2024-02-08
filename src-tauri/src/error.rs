@@ -14,6 +14,8 @@ pub enum Error {
     PathError(#[from] PathError),
     #[error("Other error: {0}")]
     Other(#[from] anyhow::Error),
+    #[error("Walkdir error: {0}")]
+    Walkdir(#[from] walkdir::Error),
     #[error("Unknown error")]
     Unknown,
 }

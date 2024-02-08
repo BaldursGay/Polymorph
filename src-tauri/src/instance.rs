@@ -1,5 +1,5 @@
 use std::{
-    fs::{copy, create_dir_all, read_to_string, remove_dir_all, File},
+    fs::{copy, create_dir_all, read_dir, read_to_string, remove_dir_all, File},
     io::Write,
     path::PathBuf,
 };
@@ -8,11 +8,7 @@ use tauri::State;
 use uuid::Uuid;
 use walkdir::WalkDir;
 
-use crate::{
-    error::Error,
-    models::instance::{InstanceIndex, InstanceInfo},
-    AppState,
-};
+use crate::{error::Error, models::instance::InstanceInfo, AppState};
 
 #[tauri::command]
 pub fn create_instance(
@@ -61,14 +57,6 @@ pub fn delete_instance(instance_id: Uuid, state: State<AppState>) -> Result<(), 
     let instance_dir = state.config.lock().unwrap().instances_dir.clone();
     remove_dir_all(instance_dir.join(instance_id.to_string()))?;
 
-    let mut instance_index: InstanceIndex =
-        serde_json::from_str(read_to_string(instance_dir.join("instances.index.json"))?.as_str())
-            .unwrap();
-    instance_index.instances.retain(|i| i.id != instance_id);
-
-    let mut index_file = File::create(instance_dir.join("instances.index.json"))?;
-    index_file.write_all(serde_json::to_string_pretty(&instance_index)?.as_bytes())?;
-
     Ok(())
 }
 
@@ -106,9 +94,9 @@ pub fn get_instances(state: State<AppState>) -> Result<Vec<InstanceInfo>, Error>
     let instances_info: Vec<InstanceInfo> = instance_dirs
         .into_iter()
         .filter_map(|e| {
-            let instance_info = e.join("instance.json");
-            if instance_info.exists() {
-                let instance_info_string = match read_to_string(instance_info) {
+            let info_path = e.join("instance.json");
+            if info_path.exists() {
+                let instance_info_string = match read_to_string(info_path) {
                     Ok(info) => info,
                     Err(_) => return None,
                 };
@@ -125,4 +113,33 @@ pub fn get_instances(state: State<AppState>) -> Result<Vec<InstanceInfo>, Error>
         .collect();
 
     Ok(instances_info)
+}
+
+#[tauri::command]
+pub fn get_icon_path(id: Uuid, state: State<AppState>) -> Result<Option<PathBuf>, Error> {
+    let instances_dir = state.config.lock().unwrap().instances_dir.clone();
+
+    let lookup_dir = instances_dir.join(id.to_string());
+
+    let path = match read_dir(lookup_dir)?.find(|f| match f {
+        Ok(dir_entry) => {
+            let extensions = vec!["png", "jpg", "jpeg", "svg", "webp", "gif", "jpg"];
+
+            for extension in extensions {
+                if dir_entry
+                    .path()
+                    .ends_with(format!("instance.{}", extension))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        Err(_) => return false,
+    }) {
+        Some(dir) => Some(dir?.path().to_path_buf()),
+        None => None,
+    };
+
+    Ok(path)
 }

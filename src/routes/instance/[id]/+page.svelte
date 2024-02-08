@@ -3,6 +3,21 @@
 	import { ArrowLeft, HeartCrack, Play } from 'lucide-svelte';
 
 	import placeholderIcon from '$lib/assets/placeholder/instance.png';
+	import { invoke, tauri } from '@tauri-apps/api';
+
+	async function getIconSrc(id: string): Promise<string | null> {
+		let instanceIconPath: string | null = null;
+
+		await invoke('get_icon_path', { id: id }).then((res) => {
+			instanceIconPath = res as string;
+		});
+
+		if (!instanceIconPath) return null;
+
+		let res = tauri.convertFileSrc(instanceIconPath);
+
+		return res;
+	}
 
 	export let data;
 </script>
@@ -13,12 +28,19 @@
 			<div class="flex gap-2">
 				<a class="btn-icon hover:variant-ghost-surface rounded-xl" href="/"><ArrowLeft /></a
 				>
-				<img
-					class="rounded-xl shadow-lg"
-					width="50"
-					src={placeholderIcon}
-					alt="PLACEHOLDER!!! instance icon"
-				/>
+				{#await getIconSrc(data.instance.id)}
+					<img
+						class="rounded-xl shadow-lg w-[50px] h-[50px] object-cover"
+						src={placeholderIcon}
+						alt="instance icon"
+					/>
+				{:then imgSrc}
+					<img
+						class="rounded-xl shadow-lg w-[50px] h-[50px] object-cover"
+						src={imgSrc || placeholderIcon}
+						alt="instance icon"
+					/>
+				{/await}
 			</div>
 			<span class="text-2xl font-bold pb-1">{data.instance.name}</span>
 		</div>

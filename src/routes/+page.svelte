@@ -2,7 +2,7 @@
 	import { _ } from 'svelte-i18n';
 
 	import { FolderOpen, RefreshCw, Swords } from 'lucide-svelte';
-	import { invoke } from '@tauri-apps/api';
+	import { invoke, tauri } from '@tauri-apps/api';
 
 	import { InstanceCard } from '$lib/components/instance/index.js';
 
@@ -21,6 +21,20 @@
 	}
 
 	let refreshing = false;
+
+	async function getIconSrc(id: string): Promise<string | null> {
+		let instanceIconPath: string | null = null;
+
+		await invoke('get_icon_path', { id: id }).then((res) => {
+			instanceIconPath = res as string;
+		});
+
+		if (!instanceIconPath) return null;
+
+		let res = tauri.convertFileSrc(instanceIconPath);
+
+		return res;
+	}
 </script>
 
 <div class="flex flex-col grow w-full h-full">
@@ -56,7 +70,11 @@
 		{:else}
 			<div class="flex flex-col grow space-y-2.5">
 				{#each $instances as { order_index, id, name }}
-					<InstanceCard title={name} instanceId={id} />
+					{#await getIconSrc(id)}
+						<InstanceCard title={name} instanceId={id} />
+					{:then src}
+						<InstanceCard title={name} instanceId={id} instanceIconSrc={src} />
+					{/await}
 				{/each}
 			</div>
 		{/if}

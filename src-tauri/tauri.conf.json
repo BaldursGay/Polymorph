@@ -44,7 +44,8 @@
 			},
 			"protocol": {
 				"all": false,
-				"asset": true
+				"asset": true,
+				"assetScope": ["**"]
 			}
 		},
 		"bundle": {

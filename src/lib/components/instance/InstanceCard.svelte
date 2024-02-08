@@ -10,12 +10,13 @@
 		getToastStore,
 		type ToastSettings
 	} from '@skeletonlabs/skeleton';
-	import { invoke } from '@tauri-apps/api';
+	import { invoke, tauri } from '@tauri-apps/api';
 	import { Check, Clipboard, FolderOpen, MoreHorizontal, Play, Trash2 } from 'lucide-svelte';
 
 	export let title: string;
 	export let instanceId: string;
 	export let instanceIconPath: string | undefined = undefined;
+	export let instanceIconSrc: string | null | undefined = undefined;
 
 	const toastStore = getToastStore();
 	const confirmDeleteToast: ToastSettings = {
@@ -93,9 +94,8 @@
 <div class="card card-hover flex justify-between place-items-center">
 	<a class="flex grow p-2 gap-3" href="/instance/{instanceId}">
 		<img
-			class="rounded-xl"
-			width="75"
-			src={instanceIconPath || placeholderIcon}
+			class="rounded-xl w-[75px] h-[75px] object-cover"
+			src={instanceIconSrc || placeholderIcon}
 			alt={instanceIconPath ? `Instance '${title}' icon` : 'Generic instance icon'}
 		/>
 		<span class="text-lg font-semibold">{title}</span>
