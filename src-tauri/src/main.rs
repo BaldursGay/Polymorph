@@ -7,7 +7,10 @@ use crate::{
         set_instances_directory, AppConfig,
     },
     game::autodetect_game_folder,
-    instance::{create_instance, delete_instance, get_icon_path, get_instance_info, get_instances},
+    instance::{
+        create_instance, delete_instance, get_icon_path, get_instance_info, get_instances,
+        path_from_id,
+    },
     util::open_from_path,
 };
 use std::{fs::File, io::prelude::*, path::PathBuf, sync::Mutex};
@@ -79,6 +82,7 @@ fn main() -> Result<(), error::Error> {
             get_instance_info,
             get_config_file_json,
             open_from_path,
+            path_from_id,
             set_game_directory,
             set_instances_directory,
         ])

@@ -8,7 +8,7 @@
 	import { Upload } from 'lucide-svelte';
 
 	import instanceIconPlaceholder from '$lib/assets/placeholder/instance.png';
-	import refreshInstances from '$lib/utils/instance';
+	import { refreshInstances } from '$lib/utils/instance';
 
 	export let parent: SvelteComponent;
 	const modalStore = getModalStore();

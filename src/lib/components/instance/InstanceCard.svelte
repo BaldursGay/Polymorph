@@ -1,6 +1,6 @@
 <script lang="ts">
 	import placeholderIcon from '$lib/assets/placeholder/instance.png';
-	import refreshInstances from '$lib/utils/instance';
+	import { refreshInstances, openInstanceFolder } from '$lib/utils/instance';
 	import {
 		clipboard,
 		getModalStore,
@@ -58,6 +58,10 @@
 			async () => await refreshInstances()
 		);
 	}
+
+	async function openInstanceFolderHandler(): Promise<void> {
+		await openInstanceFolder(instanceId);
+	}
 </script>
 
 <div class="card p-2 z-20" data-popup="morePopup-{instanceId}">
@@ -104,8 +108,9 @@
 		<button class="btn-icon hover:variant-ghost-surface rounded-[12px] z-10"
 			><Play size="18" /></button
 		>
-		<button class="btn-icon hover:variant-ghost-surface rounded-[12px]"
-			><FolderOpen size="18" /></button
+		<button
+			class="btn-icon hover:variant-ghost-surface rounded-[12px]"
+			on:click={openInstanceFolderHandler}><FolderOpen size="18" /></button
 		>
 		<button
 			class="btn-icon hover:variant-ghost-surface rounded-[12px]"

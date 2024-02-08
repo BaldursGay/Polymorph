@@ -143,3 +143,9 @@ pub fn get_icon_path(id: Uuid, state: State<AppState>) -> Result<Option<PathBuf>
 
     Ok(path)
 }
+
+#[tauri::command]
+pub fn path_from_id(id: Uuid, state: State<AppState>) -> Result<PathBuf, Error> {
+    let instances_dir = state.config.lock().unwrap().instances_dir.clone();
+    Ok(instances_dir.join(id.to_string()))
+}

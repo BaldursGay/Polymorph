@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { ArrowLeft, HeartCrack, Play } from 'lucide-svelte';
+	import { ArrowLeft, FolderOpen, HeartCrack, Play } from 'lucide-svelte';
 
 	import placeholderIcon from '$lib/assets/placeholder/instance.png';
 	import { invoke, tauri } from '@tauri-apps/api';
+	import { openInstanceFolder } from '$lib/utils/instance';
 
 	async function getIconSrc(id: string): Promise<string | null> {
 		let instanceIconPath: string | null = null;
@@ -17,6 +18,10 @@
 		let res = tauri.convertFileSrc(instanceIconPath);
 
 		return res;
+	}
+
+	async function openInstanceFolderHandler(): Promise<void> {
+		await openInstanceFolder(data.instance.id);
 	}
 
 	export let data;
@@ -46,6 +51,10 @@
 		</div>
 		<div class="flex gap-1">
 			<button class="btn-icon rounded-xl hover:variant-ghost-surface"><Play /></button>
+			<button
+				class="btn-icon rounded-xl hover:variant-ghost-surface"
+				on:click={openInstanceFolderHandler}><FolderOpen /></button
+			>
 		</div>
 	</div>
 

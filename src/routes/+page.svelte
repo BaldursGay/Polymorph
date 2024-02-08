@@ -6,7 +6,7 @@
 
 	import { InstanceCard } from '$lib/components/instance/index.js';
 
-	import refreshInstances from '$lib/utils/instance';
+	import { refreshInstances } from '$lib/utils/instance';
 
 	import { appConfig } from '$lib/stores/config.js';
 	import { instances } from '$lib/stores/instance.js';
