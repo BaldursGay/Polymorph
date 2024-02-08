@@ -2,7 +2,8 @@
 	import { _ } from 'svelte-i18n';
 
 	import type { SvelteComponent } from 'svelte';
-	import { invoke } from '@tauri-apps/api';
+	import { invoke, tauri } from '@tauri-apps/api';
+	import { open } from '@tauri-apps/api/dialog';
 	import {
 		FileButton,
 		getModalStore,
@@ -19,7 +20,8 @@
 
 	const toastStore = getToastStore();
 
-	let instanceIcon: string | undefined = undefined;
+	let instanceIcon: string | string[] | null | undefined = undefined;
+	let instanceIconSrc: string | undefined = undefined;
 	let instanceName: string;
 	let formValid: boolean = true;
 
@@ -37,7 +39,10 @@
 
 	async function onFormSubmit(): Promise<void> {
 		if (instanceName !== undefined && instanceName !== '') {
-			invoke('create_instance', { instanceName: instanceName }).then(async () => {
+			invoke('create_instance', {
+				instanceName: instanceName
+				// iconPath: instanceIconSrc ? instanceIconSrc : null
+			}).then(async () => {
 				await refreshInstancesIndex();
 				toastStore.trigger(createdInstanceToast);
 			});
@@ -49,36 +54,23 @@
 		}
 	}
 
-	function handleReadFile(event: Event) {
-		const target = event.target as HTMLInputElement;
-		if (!target.files) {
-			let noFilesToast: ToastSettings = {
-				message: $_('modal.create_instance.toast.error.no_file'),
-				hoverable: true,
-				background: 'variant-soft-error'
-			};
-			toastStore.trigger(noFilesToast);
-			return;
-		}
+	// modified from @modrinth/theseus:
+	// https://github.com/modrinth/theseus/blob/3ff0ff238a4360960a8fee26d45094f92c8fefc5/theseus_gui/src/components/ui/InstanceCreationModal.vue#L383
+	async function handleReadFile() {
+		instanceIcon = await open({
+			title: 'Select an instance image',
+			multiple: false,
+			filters: [
+				{
+					name: 'Image',
+					extensions: ['png', 'jpg', 'jpeg', 'svg', 'webp', 'gif', 'jpg']
+				}
+			]
+		});
 
-		let image = target.files[0];
+		if (!instanceIcon) return;
 
-		console.log(image.type);
-		if (!['image/png', 'image/jpg', 'image/jpeg'].includes(image.type)) {
-			let invalidFileType: ToastSettings = {
-				message: $_('modal.create_instance.toast.error.invalid_type'),
-				hoverable: true,
-				background: 'variant-soft-error'
-			};
-			toastStore.trigger(invalidFileType);
-			return;
-		}
-
-		let fileReader = new FileReader();
-		fileReader.readAsDataURL(image);
-		fileReader.onload = (res) => {
-			instanceIcon = res.target?.result?.toString();
-		};
+		instanceIconSrc = tauri.convertFileSrc(instanceIcon.toString());
 	}
 </script>
 
@@ -89,7 +81,7 @@
 		<div class="flex gap-4">
 			<img
 				class="w-[145px] h-[145px] rounded-xl object-cover"
-				src={instanceIcon ? instanceIcon : instanceIconPlaceholder}
+				src={instanceIconSrc || instanceIconPlaceholder}
 				alt="Instance Icon"
 			/>
 			<form class="flex flex-col justify-center w-full gap-4">
@@ -104,7 +96,7 @@
 						name="instanceNameInput"
 					/>
 				</label>
-				<FileButton
+				<!-- <FileButton
 					name="instanceIconUploadButton"
 					button="btn variant-ghost hover:variant-filled"
 					width="w-full"
@@ -113,7 +105,14 @@
 				>
 					<Upload size="20" />
 					<span>{$_('modal.create_instance.form.icon.label')}</span>
-				</FileButton>
+				</FileButton> -->
+				<button
+					name="instanceIconUploadButton"
+					class="btn variant-ghost hover:variant-filled"
+					on:click={handleReadFile}
+				>
+					{$_('modal.create_instance.form.icon.label')}
+				</button>
 			</form>
 		</div>
 		<footer class={parent.regionFooter}>
