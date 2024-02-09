@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { ArrowLeft, FolderOpen, HeartCrack, Play } from 'lucide-svelte';
+	import { ArrowLeft, FolderOpen, HeartCrack, Play, Upload } from 'lucide-svelte';
 
 	import placeholderIcon from '$lib/assets/placeholder/instance.png';
-	import { invoke, tauri } from '@tauri-apps/api';
+	import { invoke, tauri, dialog } from '@tauri-apps/api';
 	import { openInstanceFolder } from '$lib/utils/instance';
 
 	async function getIconSrc(id: string): Promise<string | null> {
@@ -22,6 +22,25 @@
 
 	async function openInstanceFolderHandler(): Promise<void> {
 		await openInstanceFolder(data.instance.id);
+	}
+
+	async function handleFileUpload(): Promise<void> {
+		let uploadedFiles = await dialog.open({
+			title: $_('page.instance.action.button.add_mods.dialog_title'),
+			multiple: true,
+			filters: [
+				{
+					name: 'Mods',
+					extensions: ['pak']
+				}
+			]
+		});
+
+		if (!uploadedFiles) return;
+
+		for (let i = 0; i < uploadedFiles.length; i++) {
+			console.log(uploadedFiles[i]);
+		}
 	}
 
 	export let data;
@@ -58,13 +77,21 @@
 		</div>
 	</div>
 
-	<div class="flex grow place-self-center place-items-center gap-2.5">
-		<HeartCrack class="mt-0.5" size="64" />
-		<div class="flex flex-col gap-1">
-			<h2 class="h2">
-				<span class="font-bold">{$_('page.instance.no_mods')}</span>
-			</h2>
-			<p class="text-lg">{$_('page.instance.add_mods')}</p>
+	<div class="flex grow place-self-center">
+		<div class="flex flex-col justify-center space-y-5">
+			<div class="flex place-items-center gap-2.5">
+				<HeartCrack class="mt-0.5" size="64" />
+				<div class="flex flex-col gap-1">
+					<h2 class="h2">
+						<span class="font-bold">{$_('page.instance.no_mods')}</span>
+					</h2>
+					<p class="text-lg">{$_('page.instance.add_mods')}</p>
+				</div>
+			</div>
+			<button class="btn variant-outline hover:variant-filled" on:click={handleFileUpload}>
+				<Upload size="20" />
+				<span>{$_('page.instance.action.button.add_mods.title')}</span>
+			</button>
 		</div>
 	</div>
 </div>

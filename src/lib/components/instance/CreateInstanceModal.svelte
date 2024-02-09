@@ -5,7 +5,7 @@
 	import { invoke, tauri } from '@tauri-apps/api';
 	import { open } from '@tauri-apps/api/dialog';
 	import { getModalStore, getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
-	import { Upload } from 'lucide-svelte';
+	import { Trash2, Upload } from 'lucide-svelte';
 
 	import instanceIconPlaceholder from '$lib/assets/placeholder/instance.png';
 	import { refreshInstances } from '$lib/utils/instance';
@@ -69,6 +69,11 @@
 		instanceIconPath = instanceIcon.toString();
 		instanceIconSrc = tauri.convertFileSrc(instanceIcon.toString());
 	}
+
+	function handleRemoveIcon() {
+		instanceIconPath = undefined;
+		instanceIconSrc = undefined;
+	}
 </script>
 
 {#if $modalStore[0]}
@@ -93,14 +98,23 @@
 						name="instanceNameInput"
 					/>
 				</label>
-				<button
-					name="instanceIconUploadButton"
-					class="btn variant-ghost-surface"
-					on:click={handleUploadFile}
-				>
-					<Upload size="20" />
-					<span>{$_('modal.create_instance.form.icon.label')}</span>
-				</button>
+				<div class="flex gap-2">
+					<button
+						name="instanceIconUploadButton"
+						class="btn variant-ghost-surface grow"
+						on:click={handleUploadFile}
+					>
+						<Upload size="20" />
+						<span>{$_('modal.create_instance.form.icon.label')}</span>
+					</button>
+					<button
+						name="instanceIconDeleteButton"
+						class="btn-icon variant-soft-error hover:variant-ghost-error rounded-xl"
+						on:click={handleRemoveIcon}
+					>
+						<Trash2 size="20" />
+					</button>
+				</div>
 			</form>
 		</div>
 		<footer class={parent.regionFooter}>

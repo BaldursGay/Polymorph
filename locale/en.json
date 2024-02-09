@@ -6,29 +6,37 @@
 				"confirm": "Create Instance"
 			},
 			"description": "Create a new instance with a specified name and, optionally, icon.",
+			"dialog": "Select an instance image",
 			"form": {
+				"icon": {
+					"label": "Upload Icon"
+				},
 				"name": {
 					"label": "Name",
 					"placeholder": "New Instance..."
-				},
-				"icon": {
-					"label": "Upload Icon"
 				}
 			},
 			"title": "Create Instance",
 			"toast": {
 				"error": {
 					"invalid_name": "Error: Invalid instance name!",
-					"no_file": "Error: No file selected!",
-					"invalid_type": "Error: Invalid file extension!"
+					"invalid_type": "Error: Invalid file extension!",
+					"no_file": "Error: No file selected!"
 				},
 				"success": "Successfully created new instance!"
-			},
-			"dialog": "Select an instance image"
+			}
 		}
 	},
 	"page": {
 		"instance": {
+			"action": {
+				"button": {
+					"add_mods": {
+						"title": "Add mod(s)",
+						"dialog_title": "Add mod(s) to instance"
+					}
+				}
+			},
 			"add_mods": "Drag mods here to add them to the instance!",
 			"create_an_instance": "Create an instance with the `+` icon in the bottom left!",
 			"error": {
@@ -53,18 +61,18 @@
 	},
 	"settings": {
 		"game_version": {
-			"title": "Game Version",
 			"dx11": "DirectX 11",
+			"title": "Game Version",
 			"vulkan": "Vulkan"
 		},
 		"skip_launcher": "Skip Launcher",
-		"use_steam": "Use Steam",
 		"theme": {
-			"title": "Color Theme",
 			"auto": "Auto",
+			"dark": "Dark",
 			"light": "Light",
-			"dark": "Dark"
-		}
+			"title": "Color Theme"
+		},
+		"use_steam": "Use Steam"
 	},
 	"sidebar": {
 		"navigation": {
